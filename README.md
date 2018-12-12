@@ -1,9 +1,6 @@
 # my-imdb-frontend62
 
-
-
-
-Miruna Baciu
+Miruna Baciu 
 
 Delia Nechita
 
