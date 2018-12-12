@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IMDB Movies</title>
+    <link rel="stylesheet" href="../styles.css" />
+	<meta charset="UTF-8" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src="../models/Movies.js"></script>
+    <script src="../views/home.js"></script>
+    <script src="../models/Movie.js"></script>
+</head>
+
+<body>
+        <header class="mainheader row"><h4>Welcome to the new movies database!</h4></header>
+        <div class="inline">
+                <img
+                src=https://static.posters.cz/image/750/poster/juego-de-tronos-game-of-thrones-logo-i21034.jpg height="200" width="800"
+                />
+            <h1 class="logo">NETMOVIES</h1>
+            <img src=E:\date\Workspace\logo2.jpg />
+            <h4>Categories</h4>
+            <h4>Search movies</h4>
+                <select class="categories" name="categories">  
+                    <option value="1" selected>All</option> 
+                    <option value="2">Action</option>  
+                    <option value="3">SF</option>
+                    <option value="4">Drama</option>  
+                    <option value="5">Series</option>
+                    <option value="6">Thriller</option>  
+                    <option value="7">Comedy</option>
+                    <option value="8">Horror</option>  
+                    <option value="9">TV</option>
+                    <option value="10">Romantic</option>
+                    <option value=11>Fantastic</option>  
+                    <option value="12">Documentary</option>
+                </select>    
+                 <input type="text" placeholder="Search..">
+                 <button class="search">Go!</button>  
+            </div>  
+                <h6 class="register">Register</h6>
+                <h6 class="login">Login</h6>
+                <nav class="row">
+                    <ul class="buttons">
+                      <li>About</li>
+                      <li>Top Ten</li>
+                      <li>Cinema City</li>
+                      <li>Contact</li>
+                    </ul>
+                  </nav>
+                  <main>
+                        <article class="col-md-8 col-xl-9">
+                                <header class="article-header"><h2>What's your ultimate  movie experience?</h2></header>
+                                <section class="clearfix">
+                                  <h3>Prepare for the best movies!</h3>
+                                  <div id="movies"></div>
+	<div id="template">
+		
+		<h3 class="movie-title"></h3>
+        <img class="myImage">
+        <h3 class="rating" />
+        <h3 class="genre" />
+        <h3 class="year" />
+		<!-- <div>
+			<button class="game-delete">Delete</button>
+			<button class="game-edit">Edit</button>
+		</div> -->
+    </div>
+                                </section>
+                                <footer>Created at 01/01/2019 by CodeForFood 62 Frontend Team</footer>
+      </article>
+       <aside class="col-md-4 col-xl-3">
+        <h2></h2>
+        <p>
+          
+        </p>
+      </aside>
+    
+</main>
+<footer>
+    
+    
+</footer>
+
+	
+</body>
+
+</html>
