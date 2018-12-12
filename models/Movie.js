@@ -53,4 +53,3 @@ Movie.prototype.getMovieDetails = function() {
   return that
   });
 };
-
