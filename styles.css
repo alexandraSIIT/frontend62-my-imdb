@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: lightcyan;
+  }
+
+
+.logo, .categories, .search {
+    display: inline;
+}
+
+.login, .register {
+    display:flexbox;
+    justify-content: flex-end;
+    
+}
