@@ -1,8 +1,7 @@
 * {
-    margin: 0;
+    padding: 5px;
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: lightcyan;
   }
 
 
@@ -14,4 +13,46 @@
     display:flexbox;
     justify-content: flex-end;
     
+}
+
+#movie-search, #search-category {
+    border: none;
+    border-radius: 3px 0 0 3px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.4) inset;
+    font: 14px Verdana, Arial, sans-serif;
+    padding: 5px 8px;
+    vertical-align: middle;
+}
+
+#search-category {
+    height: 20%;
+    width: 10%;
+}
+
+#movie-search {
+    height: 20%;
+    width: 40%;
+}
+
+.search-header {
+    width: 100%;
+    height: 125px;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.search-box {
+    text-align: center;
+}
+
+#search-button {
+    height: 28px;
+    background-color: orange;
+}
+
+.template {
+    width: 30%;
+}
+
+.myImage {
+    width: 150%;
 }
