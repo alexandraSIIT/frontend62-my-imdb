@@ -3,16 +3,13 @@ var movies = new Movies();
 getMovies();
 function getMovies() {
   movies.getMovies().then(function () {
-    // console.log("List movies", movies.items);
     displayMovies(movies.items);
   });
 }
 
 var template = document.getElementById("template");
 function displayMovies(response) {
-  console.log(response)
   var moviesContainer = document.getElementById("movies");
-  // var template = document.getElementById("template");
   // traverse the array (parcurgerea sirului)
   for (var i = 0; i < response.length; i++) {
 
