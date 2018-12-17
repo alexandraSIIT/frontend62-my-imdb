@@ -1,6 +1,6 @@
 $(function() {
     $(".error").hide();
-    $(".button").click(function() {
+    $(".login-button").click(function() {
         $(".error").hide();
         var name = $("input#username").val();
         if (name == "") {
@@ -15,9 +15,10 @@ $(function() {
             $("input#password").focus();
             return false;
         }
-        
+        console.log("click")
         var dataString2 = "username=" + name + "&password=" + password;
         Login(dataString2);
         return false;
     });
 });
+
