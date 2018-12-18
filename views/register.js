@@ -1,6 +1,6 @@
 $(function() {
     $(".error").hide();
-    $(".button").click(function() {
+    $(".register-button").click(function() {
         $(".error").hide();
         var name = $("input#username").val();
             if (name == "") {
@@ -36,6 +36,7 @@ $(function() {
             return false;
         }
 
+        console.log("click")
         var dataString = "username=" + name + "&email=" + email + "&password=" + password;
         Register(dataString);
         return false;

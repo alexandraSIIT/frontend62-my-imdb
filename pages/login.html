@@ -8,13 +8,22 @@
     <title>Login</title>
 </head>
 <body>
-    <form name="login-form" action="">
-        <input type="text" name="username2" id="username2" value="" class="text-input">
-        <input type="text" name="password2" id="password2" value="" class="text-input">
-        <input type="submit" name="submit" class="button2" id="button2" value="login">
+    <form name="form" action="">
+        <Label for="username" id="username">Username</Label>
+        <input type="text" name="username" id="username" value="" class="text-input">
+        <label class="error" for="username" id="username-error">This field is required</label>
+
+        <label for="password" id="password">Password</label>
+        <input type="password" name="password" id="password" value="" class="text-input">
+        <label class="error" for="password" id="password-error">This field is required</label>
+
+        <input type="submit" name="submit" class="login-button" id="button" value="Login">
+
+        <input type="submit" name="submit" class="logout-button" id="button2" value="Logout">
     </form>
 
     <script src="../models/Auth.js"></script>
     <script src="../views/login.js"></script>
+    <script src="../views/logout.js"></script>
 </body>
 </html>
