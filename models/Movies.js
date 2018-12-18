@@ -1,17 +1,26 @@
 function Movies() {
     this.items = [];
-    this.moviesFiltered = [];
+    this.numberOfPages = 0;
+    this.currentPage = 0;
 }
 
 var movieUrl = "https://ancient-caverns-16784.herokuapp.com/movies";
-Movies.prototype.getMovies = function () {
+Movies.prototype.getMovies = function (take, skip, category, searchParam) {
     var me = this;
-    return $.get(movieUrl).then(function (response) {
+    var urlMoviesPaginated;
+    if (!category || !searchParam) {
+        urlMoviesPaginated = movieUrl + `?take=${take}&skip=${skip}`;
+    } else {
+        urlMoviesPaginated = movieUrl + `?${category}=${searchParam}&take=${take}&skip=${skip}`;
+    }
+    return $.get(urlMoviesPaginated).then(function (response) {
+        me.items = [];
         for (var i = 0; i < response.results.length; i++) {
             var movie = new Movie(response.results[i]);
             me.items.push(movie);
         }
-
+        me.numberOfPages = response.pagination.numberOfPages;
+        me.currentPage = response.pagination.currentPage;
     },
         function (error) {
             console.log(
@@ -20,21 +29,3 @@ Movies.prototype.getMovies = function () {
             );
         })
 };
-
-Movies.prototype.getMoviesFilter = function (category, searchParam) {
-    var movieParamsUrl = movieUrl + '?' + category + '=' + searchParam;
-    var me = this;
-    return $.get(movieParamsUrl).then(function (response) {
-        for (var i = 0; i < response.results.length; i++) {
-            var mov = new Movie(response.results[i]);
-            me.moviesFiltered.push(mov);
-            console.log(mov);
-        }
-    },
-        function (error) {
-            console.log(
-                "GET movies request was rejected with status ",
-                error.status
-            );
-        });
-}

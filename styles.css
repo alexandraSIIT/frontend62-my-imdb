@@ -56,3 +56,25 @@
 .myImage {
     width: 150%;
 }
+
+.anchor-page-nb {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    cursor: pointer;
+}
+
+a.active {
+    background-color: dodgerblue;
+    color: white;
+  }
+
+#pagination {
+    text-align: center;
+}  
+
+/* footer {
+    display: block
+} */

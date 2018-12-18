@@ -2,7 +2,7 @@ var movies = new Movies();
 
 getMovies();
 function getMovies() {
-  movies.getMovies().then(function () {
+  movies.getMovies(10, 0).then(function () {
     displayMovies(movies.items);
   });
 }
@@ -58,6 +58,14 @@ function displayMovies(response) {
     moviesContainer.appendChild(movieClone);
   }
 
+  if (movies.numberOfPages > 1) {
+    if (categoryDropDown.value && searchInput.value) {
+      addPagination(categoryDropDown.value, searchInput.value);
+    } else {
+      addPagination();
+    }
+  }
+
   // remove the template from DOM
   template.remove();
 }
@@ -72,9 +80,9 @@ function searchMovie() {
   var searchInputValue = searchInput.value;
   if (searchInputValue) {
     removeExistentMovies();
-    movies.getMoviesFilter(selectedCategory, searchInputValue);
-    console.log(movies.moviesFiltered)
-    displayMovies(movies.moviesFiltered);
+    movies.getMovies(10, 0, selectedCategory, searchInputValue).then(function () {
+      displayMovies(movies.items);
+    });
   } else {
     searchInput.style.border = '2px solid red';
   }
@@ -85,6 +93,11 @@ function removeExistentMovies() {
   while (movieDiv[0]) {
     movieDiv[0].parentNode.removeChild(movieDiv[0]);
   }
+  var anchorPageNb = document.getElementsByClassName('anchor-page-nb');
+  console.log(anchorPageNb)
+  while (anchorPageNb[0]) {
+    anchorPageNb[0].parentNode.removeChild(anchorPageNb[0]);
+  }
 }
 
 categoryDropDown.addEventListener('change', function () {
@@ -94,7 +107,51 @@ categoryDropDown.addEventListener('change', function () {
   displayMovies(movies.items);
 })
 
-searchInput.addEventListener('keyup', function(){
+searchInput.addEventListener('keyup', function () {
   removeExistentMovies();
   displayMovies(movies.items);
 })
+
+
+function addPagination(category, searchValue) {
+  var pagination = document.getElementById('pagination');
+  let anchor;
+  var firstPageBtn = document.createElement('a');
+  firstPageBtn.innerHTML = '&laquo';
+  firstPageBtn.className = 'anchor-page-nb';
+  firstPageBtn.addEventListener('click', function () {
+    removeExistentMovies();
+    movies.getMovies(10, 0, category, searchValue).then(function () {
+      displayMovies(movies.items);
+    });
+  });
+  pagination.appendChild(firstPageBtn);
+  
+  for (var i = 1; i <= movies.numberOfPages; i++) {
+    anchor = document.createElement('a');
+    anchor.innerHTML = i;
+    anchor.className = 'anchor-page-nb';
+    pagination.appendChild(anchor);
+  }
+
+  Array.from(document.getElementsByClassName('anchor-page-nb')).forEach(function (anchor, index) {
+    anchor.addEventListener('click', function () {
+      removeExistentMovies();
+      movies.getMovies(10, (index - 1) * 10, category, searchValue).then(function () {
+        displayMovies(movies.items);
+      });
+      anchor.className = 'active';
+    });
+  });
+
+  var lastPageBtn = document.createElement('a');
+  lastPageBtn.innerHTML = '&raquo;';
+  lastPageBtn.className = 'anchor-page-nb';
+  lastPageBtn.addEventListener('click', function () {
+    removeExistentMovies();
+    movies.getMovies(10, (movies.numberOfPages - 1) * 10, category, searchValue).then(function () {
+      displayMovies(movies.items);
+    });
+  });
+  pagination.appendChild(lastPageBtn);
+}
