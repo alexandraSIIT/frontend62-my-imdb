@@ -29,13 +29,17 @@ function Login(dataString2) {
 
 function Logout(token) {
     $.ajax({
+
         type: "GET",
         url: url + "auth/logout",
         headers: {
             "x-auth-token": token
         },
+
         success: function(response) {
             console.log(response);
         }
     })
+
 }
+
