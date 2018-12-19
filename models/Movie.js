@@ -21,12 +21,12 @@ function Movie(options = {}) {
   this.production = options.production;
 }
 
-var apiRootUrl = "https://ancient-caverns-16784.herokuapp.com/movies";
+var apiRootUrl = "https://ancient-caverns-16784.herokuapp.com/movies/";
 
 Movie.prototype.getMovieDetails = function() {
   var that = this;
   return $.ajax({
-    url: apiRootUrl + "/5baa62368b5f4c002194c7e6",
+    url: apiRootUrl + "5c162ac52f61900021f12941",
     method: "GET"
   }).then(function(response) {
     console.log(response);
@@ -53,3 +53,14 @@ Movie.prototype.getMovieDetails = function() {
   return that
   });
 };
+
+updateMovieDetails = function (inputTitle){
+  return $.ajax({
+    url: apiRootUrl + response.results._id,
+    method: "PUT",
+    data: {Title: inputTitle,
+    Year: inputYear,
+    Rated: inputRated,
+    }
+  })
+}
