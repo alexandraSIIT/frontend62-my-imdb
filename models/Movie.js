@@ -23,10 +23,10 @@ function Movie(options = {}) {
 
 var apiRootUrl = "https://ancient-caverns-16784.herokuapp.com/movies/";
 
-Movie.prototype.getMovieDetails = function() {
+Movie.prototype.getMovieDetails = function(id) {
   var that = this;
   return $.ajax({
-    url: apiRootUrl + "5c162ac52f61900021f12941",
+    url: apiRootUrl + id,
     method: "GET"
   }).then(function(response) {
     console.log(response);
