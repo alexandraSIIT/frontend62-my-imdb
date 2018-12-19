@@ -8,14 +8,23 @@ $(function() {
                 $("input#username").focus();
                 return false;
             }
-
+            
         var email = $("input#email").val();
             if (email == "") {
                 $("label#email-error").show();
                 $("input#email").focus();
-                return false;
+                return false; 
             }
-
+            else {if(email){
+                var emailRE=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    if(!emailRE.test(email)){
+                        $("label#email-validation").show();
+                        $("input#email").focus();
+                        return false; 
+                    }}
+        
+           
+        }
         var password = $("input#password").val();
         if (password == "") {
             $("label#password-error").show();
