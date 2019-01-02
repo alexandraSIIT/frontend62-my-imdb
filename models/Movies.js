@@ -44,7 +44,7 @@ Movies.prototype.addMovieRequest = function (
     imdbId
 ) {
     return $.ajax({
-        url: movieUrl,
+        url: movieUrl + '/m',
         method: "POST",
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

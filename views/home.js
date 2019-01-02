@@ -219,7 +219,7 @@ function addMovie() {
         });
       },
       function (error) {
-        // displayError(error);
+        displayError(error);
       }
     );
   } else {
@@ -264,7 +264,12 @@ function getMovieDetails(clickedButton, movieObject) {
       console.log(response)
     },
     function (error) {
-      // displayError(error);
+      displayError(error);
     }
   );
+}
+
+function displayError(error) {
+  console.log("ADD movie request was rejected with status ",
+    error.status);
 }
