@@ -4,6 +4,7 @@ getMovies();
 function getMovies() {
   movies.getMovies(10, 0).then(function () {
     displayMovies(movies.items);
+    console.log(movies.items)
   });
 }
 
@@ -24,7 +25,7 @@ function displayMovies(response) {
     var movieTitleElement = movieClone.querySelector(".movie-title");
     movieTitleElement.innerHTML = response[i].title;
     var imageUrl = movieClone.querySelector(".myImage");
-    if (response[i].poster == 'N/A') {
+    if (response[i].poster == 'N/A' || response[i].poster == '') {
       imageUrl.setAttribute("src", '../movie-default-image.jpg');
     } else {
       imageUrl.setAttribute("src", response[i].poster);
@@ -126,7 +127,7 @@ function addPagination(category, searchValue) {
     });
   });
   pagination.appendChild(firstPageBtn);
-  
+
   for (var i = 1; i <= movies.numberOfPages; i++) {
     anchor = document.createElement('a');
     anchor.innerHTML = i;
@@ -154,4 +155,89 @@ function addPagination(category, searchValue) {
     });
   });
   pagination.appendChild(lastPageBtn);
+}
+
+var addMovieBtn = document.getElementById('add-movie-button');
+var addDialog = document.getElementById('add-dialog');
+addMovieBtn.addEventListener('click', function () {
+  addDialog.showModal();
+  if (addDialog.open) {
+    var cancelDialogBtn = document.getElementById('cancel-dialog');
+    cancelDialogBtn.addEventListener('click', function (event) {
+      event.preventDefault();
+      addDialog.close();
+    })
+  }
+})
+
+var addNewMovieBtn = document.getElementById("addNewMovieBtn");
+addNewMovieBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  addMovie();
+});
+
+function addMovie() {
+  var titleNewMovie = document.getElementById("title");
+  var posterNewMovie = document.getElementById("poster");
+  var genreNewMovie = document.getElementById("genre");
+  var typeNewMovie = document.getElementById("type");
+  var yearNewMovie = document.getElementById("year");
+  var runtimeNewMovie = document.getElementById("runtime");
+  var languageNewMovie = document.getElementById("language");
+  var countryNewMovie = document.getElementById("country");
+  var imdbRatingNewMovie = document.getElementById("imdb-rating");
+  var imdbVotesNewMovie = document.getElementById("imdb-votes");
+  var imdbIdNewMovie = document.getElementById("imdb-id");
+
+  if (titleNewMovie.value && genreNewMovie.value && yearNewMovie.value && runtimeNewMovie.value) {
+    movies.addMovieRequest(
+      titleNewMovie,
+      posterNewMovie,
+      genreNewMovie,
+      typeNewMovie,
+      yearNewMovie,
+      runtimeNewMovie,
+      languageNewMovie,
+      countryNewMovie,
+      imdbRatingNewMovie,
+      imdbVotesNewMovie,
+      imdbIdNewMovie
+    ).then(
+      function (response) {
+        addDialog.close();
+        removeExistentMovies();
+        movies.getMovies(10, 0).then(function () {
+          displayMovies(movies.items);
+        });
+      },
+      function (error) {
+        // displayError(error);
+      }
+    );
+  } else {
+    if (titleNewMovie.value == '') {
+      titleNewMovie.style.border = '2px solid red';
+      titleNewMovie.addEventListener('keyup', function () {
+        titleNewMovie.style.border = 'none';
+      })
+    }
+    if (genreNewMovie.value == '') {
+      genreNewMovie.style.border = '2px solid red';
+      genreNewMovie.addEventListener('keyup', function () {
+        genreNewMovie.style.border = 'none';
+      })
+    }
+    if (yearNewMovie.value == '') {
+      yearNewMovie.style.border = '2px solid red';
+      yearNewMovie.addEventListener('keyup', function () {
+        yearNewMovie.style.border = 'none';
+      })
+    }
+    if (runtimeNewMovie.value == '') {
+      runtimeNewMovie.style.border = '2px solid red';
+      runtimeNewMovie.addEventListener('keyup', function () {
+        runtimeNewMovie.style.border = 'none';
+      })
+    }
+  }
 }

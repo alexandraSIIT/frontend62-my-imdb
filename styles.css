@@ -78,3 +78,8 @@ a.active {
 /* footer {
     display: block
 } */
+
+#add-dialog {
+    width: 70%;
+    height: 100%;
+}

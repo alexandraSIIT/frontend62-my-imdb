@@ -29,3 +29,39 @@ Movies.prototype.getMovies = function (take, skip, category, searchParam) {
             );
         })
 };
+
+Movies.prototype.addMovieRequest = function (
+    title,
+    poster,
+    genre,
+    type,
+    year,
+    runtime,
+    language,
+    country,
+    imdbRating,
+    imdbVotes,
+    imdbId
+) {
+    return $.ajax({
+        url: movieUrl,
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-Auth-Token': 'kTbK2dDS3L9tizRcEzsnOFMYK_UoPQp6'
+        },
+        data: {
+            Title: title.value,
+            Poster: poster.value,
+            Genre: genre.value,
+            Type: type.value,
+            Year: year.value,
+            Runtime: runtime.value,
+            Language: language.value,
+            Country: country.value,
+            imdbRating: imdbRating.value,
+            imdbVotes: imdbVotes.value,
+            imdbID: imdbId.value
+        }
+    })
+}

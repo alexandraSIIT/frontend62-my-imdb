@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="../styles.css" />
     <meta charset="UTF-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+
+
     </script>
     <script src="../models/Movie.js"></script>
     <script src="../models/Movies.js"></script>
@@ -13,6 +16,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -38,20 +42,80 @@
             <button id="search-button" class="fa fa-search"></button>
         </div>
     </div>
-    <!-- <h6 class="register">Register</h6> -->
-    <!-- <h6 class="login">Login</h6> -->
-    <!-- <nav class="row">
-                    <ul class="buttons">
-                      <li>About</li>
-                      <li>Top Ten</li>
-                      <li>Cinema City</li>
-                      <li>Contact</li>
-                    </ul>
-                  </nav> -->
-    <!-- <main> -->
-    <!-- <article class="col-md-8 col-xl-9"> -->
-    <!-- <header class="article-header"><h2>What's your ultimate  movie experience?</h2></header> -->
-    <!-- <h3>Prepare for the best movies!</h3> -->
+
+    <button id="add-movie-button">Add new movie</button>
+    <dialog id="add-dialog">
+        <form class='container-fluid'>
+            <div class='form-group'>
+                <div class='col-sm-12'>
+                    <label for='title' class='control-label'>Title*</label>
+                    <input id='title' class='form-control'>
+                </div>
+
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-12'>
+                    <label for='poster' class='control-label'>Poster</label>
+                    <input id='poster' class='form-control'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-6'>
+                    <label for='genre' class='control-label'>Genre*</label>
+                    <input id='genre' class='form-control'>
+                </div>
+                <div class='col-sm-6'>
+                    <label for='type' class='control-label'>Type</label>
+                    <input id='type' class='form-control'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-6'>
+                    <label for='yer' class='control-label'>Year*</label>
+                    <input id='year' class='form-control'>
+                </div>
+                <div class='col-sm-6'>
+                    <label for='runtime' class='control-label'>Runtime*</label>
+                    <input id='runtime' class='form-control'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-6'>
+                    <label for='language' class='control-label'>Language</label>
+                    <input id='language' class='form-control'>
+                </div>
+                <div class='col-sm-6'>
+                    <label for='country' class='control-label'>Country</label>
+                    <input id='country' class='form-control'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-6'>
+                    <label for='imdbRating' class='control-label'>Imdb Rating</label>
+                    <input id='imdb-rating' class='form-control'>
+                </div>
+                <div class='col-sm-6'>
+                    <label for='imdb votes' class='control-label'>Imdb Votes</label>
+                    <input id='imdb-votes' class='form-control'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-6'>
+                    <label for='imdbId' class='control-label'>Imdb ID</label>
+                    <input id='imdb-id' class='form-control'>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class='input-group' style='float:right'>
+                <button id="cancel-dialog" class='btn'>Cancel</button>
+                <button type="submit" class="btn btn-primary" id='addNewMovieBtn'>Save</button>
+            </div>
+        </form>
+    </dialog>
+
+
+
     <div id="movies"></div>
     <div id="template" class="template container-fluid">
         <img class="myImage row">
