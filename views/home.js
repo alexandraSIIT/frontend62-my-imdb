@@ -24,6 +24,14 @@ function displayMovies(response) {
 
     var movieTitleElement = movieClone.querySelector(".movie-title");
     movieTitleElement.innerHTML = response[i].title;
+
+    let movie = response[i];
+    movieTitleElement.addEventListener("click", function (event) {
+      console.log(event.target)
+
+      getMovieDetails(event.target, movie);
+      location.href = "/pages/movieDetails.html/" + movie.id;
+    })
     var imageUrl = movieClone.querySelector(".myImage");
     if (response[i].poster == 'N/A' || response[i].poster == '') {
       imageUrl.setAttribute("src", '../movie-default-image.jpg');
@@ -240,4 +248,23 @@ function addMovie() {
       })
     }
   }
+}
+
+function getMovieDetails(clickedButton, movieObject) {
+  console.log(clickedButton);
+  var grandpa = clickedButton.parentNode.parentNode;
+  var grandpaId = grandpa.id;
+  var movieId = grandpaId.replace("movie_", "");
+  console.log(movieId)
+
+
+  movieObject.getMovieDetails(movieId).then(
+    function (response) {
+      // displayGamesDetails(response);
+      console.log(response)
+    },
+    function (error) {
+      // displayError(error);
+    }
+  );
 }
