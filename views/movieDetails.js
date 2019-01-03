@@ -1,8 +1,20 @@
 var movie = new Movie ();
+movie.id = getUrlParameter('id');
 
-movie.getMovieDetails().then(function(response){
+
+movie.getMovieDetails(movie.id).then(function(response){
     displayMovieDetails(response);
 })
+
+
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+    var results = regex.exec(location.search);
+    return results === null
+      ? ""
+      : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
 
 function displayMovieDetails (response){
 
@@ -43,8 +55,8 @@ function displayMovieDetails (response){
     awards.innerHTML = "Awards Received: " + response.awards;
 
     var poster = document.querySelector(".poster");
-    if (response.poster == 'N/A') {
-        poster.innerHTML = "img src = '../movie-default-image.jpg"
+    if (response.poster == 'N/A' || response.poster == '') {
+        poster.innerHTML = "<img src='../movie-default-image.jpg'>"
       } else {
         poster.innerHTML = "<img src='" + response.poster + "' alt = 'movie poster'/>"
       }

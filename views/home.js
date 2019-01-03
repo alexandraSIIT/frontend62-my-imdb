@@ -27,10 +27,9 @@ function displayMovies(response) {
 
     let movie = response[i];
     movieTitleElement.addEventListener("click", function (event) {
-      console.log(event.target)
 
       getMovieDetails(event.target, movie);
-      location.href = "/pages/movieDetails.html/" + movie.id;
+      location.href = "/pages/movieDetails.html?id=" + movie.id;
     })
     var imageUrl = movieClone.querySelector(".myImage");
     if (response[i].poster == 'N/A' || response[i].poster == '') {
