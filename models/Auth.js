@@ -23,6 +23,15 @@ function Login(dataString2) {
         success: function(response) {
             console.log(response)
             localStorage.setItem("AccesToken", response.accessToken)
+        },
+        error: function(response) {
+            if (response.responseJSON.message == "User not found") {
+                $("h3#wrong-username").show();  
+                $("input#username").focus();
+            } else if (response.responseJSON.message == "Wrong password") {
+                $("h3#wrong-password").show();  
+                $("input#password").focus(); 
+            }
         }
     })
 }
