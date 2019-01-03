@@ -1,3 +1,5 @@
+var dataString2;
+
 $(function() {
     $(".error").hide();
     $(".login-button").click(function() {
@@ -15,8 +17,7 @@ $(function() {
             $("input#password").focus();
             return false;
         }
-        console.log("click")
-        var dataString2 = "username=" + name + "&password=" + password;
+        dataString2 = "username=" + name + "&password=" + password;
         Login(dataString2);
         return false;
     });

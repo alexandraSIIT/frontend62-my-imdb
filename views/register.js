@@ -1,3 +1,5 @@
+var dataString;
+
 $(function() {
     $(".error").hide();
     $(".register-button").click(function() {
@@ -45,8 +47,7 @@ $(function() {
             return false;
         }
 
-        console.log("click")
-        var dataString = "username=" + name + "&email=" + email + "&password=" + password;
+        dataString = "username=" + name + "&email=" + email + "&password=" + password;
         Register(dataString);
         return false;
     });

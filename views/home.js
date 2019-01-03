@@ -272,3 +272,41 @@ function displayError(error) {
   console.log("ADD movie request was rejected with status ",
     error.status);
 }
+
+var loginBtn = document.getElementById('loginBtn');
+var loginDialog = document.getElementById('login-dialog');
+loginBtn.addEventListener('click', function(){
+  loginDialog.showModal();
+  if (loginDialog.open) {
+    var cancelLoginDialogBtn = document.getElementById('cancel-login-dialog');
+    cancelLoginDialogBtn.addEventListener('click', function (event) {
+      event.preventDefault();
+      loginDialog.close();
+    })
+  }
+})
+
+var loginFormBtn = document.getElementById("loginFormBtn");
+loginFormBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  Login(dataString2);
+});
+
+var registerBtn = document.getElementById('registerBtn');
+var registerDialog = document.getElementById('register-dialog');
+registerBtn.addEventListener('click', function(){
+  registerDialog.showModal();
+  if (registerDialog.open) {
+    var cancelRegisterDialogBtn = document.getElementById('cancel-register-dialog');
+    cancelRegisterDialogBtn.addEventListener('click', function (event) {
+      event.preventDefault();
+      registerDialog.close();
+    })
+  }
+})
+
+var registerFormBtn = document.getElementById("registerFormBtn");
+registerFormBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  Register(dataString);
+});

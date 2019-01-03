@@ -20,6 +20,20 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-default navbar-expand-lg navbar-light">
+        <div class="collapse navbar-collapse justify-content-start">
+            <ul class="nav navbar-nav navbar-right ml-auto">
+                <li class="nav-item">
+                    <button id='loginBtn' data-toggle="dropdown" class="btn nav-link dropdown-toggle" href="#"
+                        aria-expanded="false">Login</button>
+                </li>
+                <li class="nav-item">
+                    <button id='registerBtn' data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1"
+                        href="#" aria-expanded="false">Sign up</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="search-header">
         <div class="inline search-box">
             <h4>Search movies</h4>
@@ -107,7 +121,55 @@
         </form>
     </dialog>
 
+    <dialog id='login-dialog'>
+        <form name="form" action="">
+            <div class='form-group'>
+                <input type="text" name="username" id="username" placeholder='Username' value="" class="text-input form-control">
+            </div>
+            <label class="error" for="username" id="username-error">This field is required</label>
+            <div id='form-group'>
+                <input type="password" name="password" id="password" value="" placeholder='Password' class="text-input form-control">
+            </div>
+            <label class="error" for="password" id="password-error">This field is required</label>
+            <div class="clearfix"></div>
+            <div class='input-group' style='float:right'>
+                <button id="cancel-login-dialog" class='btn'>Cancel</button>
+                <button type="submit" class="btn btn-primary" id='loginFormBtn'>Login</button>
+            </div>
 
+            <h3 class="error" id="wrong-username">User not found</h3>
+            <h3 class="error" id="wrong-password">Wrong password</h3>
+        </form>
+    </dialog>
+
+    <dialog id='register-dialog'>
+        <form name="form" action="">
+            <div class='form-group'>
+                <input type="text" name="usernameRegister" id="usernameRegister" placeholder='Username' class="text-input form-control">
+            </div>
+            <label class="error" for="usernameRegister" id="usernameRegister-error">This field is required</label>
+            <div class='form-group'>
+                <input type="text" name="email" id="email" placeholder='Email' class="text-input form-control">
+            </div>
+            <label class="error" for="email" id="email-error">This field is required</label>
+            <label class="error" for="email" id="email-validation">Enter a valid e-mail address</label>
+            <div id='form-group'>
+                <input type="password" name="password" id="passwordRegister" placeholder='Password' class="text-input form-control">
+            </div>
+            <div id='form-group'>
+                <input type="password" name="rePassword" id="rePasswordRegister" placeholder='Re-enter password' class="text-input form-control">
+            </div>
+            <label class="error" for="password" id="passwordRegister-error">This field is required</label>
+            <div class="clearfix"></div>
+            <div class='input-group' style='float:right'>
+                <button id="cancel-register-dialog" class='btn'>Cancel</button>
+                <button type="submit" class="btn btn-primary" id='registerFormBtn'>Register</button>
+            </div>
+
+            <h3 class="error" id="taken-username">Username is taken</h3>
+        </form>
+    </dialog>
+    </form>
 
     <div id="movies"></div>
     <div id="template" class="template container-fluid">
@@ -130,6 +192,8 @@
     <!-- <footer>Created at 01/01/2019 by CodeForFood 62 Frontend Team</footer> -->
 
     <script src="../views/home.js"></script>
+    <script src="../views/login.js"></script>
+    <script src="../models/Auth.js"></script>
 
 </body>
 
