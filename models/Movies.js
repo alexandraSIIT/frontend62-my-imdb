@@ -44,11 +44,11 @@ Movies.prototype.addMovieRequest = function (
     imdbId
 ) {
     return $.ajax({
-        url: movieUrl + '/m',
+        url: movieUrl,
         method: "POST",
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-Auth-Token': 'kTbK2dDS3L9tizRcEzsnOFMYK_UoPQp6'
+            'X-Auth-Token': 'Jhy-RvIbM0DDkAImTO6CuUtEi3K99CwV'
         },
         data: {
             Title: title.value,
