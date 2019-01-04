@@ -29,7 +29,7 @@
                 </li>
                 <li class="nav-item">
                     <button id='registerBtn' data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1"
-                        href="#" aria-expanded="false">Sign up</button>
+                        href="#" aria-expanded="false">Register</button>
                 </li>
             </ul>
         </div>
@@ -175,6 +175,8 @@
             <!-- NO MATCH PW -->
             <label class="error" for="match-password" id="passwordRegisterMatch">Passwords do not match</label>
 
+            <label class="error" id="takenUsername">Username is taken</label>
+            
             <div class="clearfix"></div>
             <div class='input-group' style='float:right'>
                 <button id="cancel-register-dialog" class='btn'>Cancel</button>
@@ -182,8 +184,6 @@
                 <button type="submit" class="btn btn-primary" id='registerFormBtn'>Register</button>
             </div>
 
-            <label class="error" id="takenUsername">Username is taken</label>
-            <h4 class="error" id="takenUsername">Username is taken</h4>
         </form>
     </dialog>
     </form>
