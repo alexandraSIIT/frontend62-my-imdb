@@ -26,11 +26,11 @@ function Login(dataString2) {
         },
         error: function(response) {
             if (response.responseJSON.message == "User not found") {
-                $("h3#wrong-username").show();  
-                $("input#username").focus();
+                $("label#usernameLoginWrong").show();  
+                $("input#usernameLogin").focus();
             } else if (response.responseJSON.message == "Wrong password") {
-                $("h3#wrong-password").show();  
-                $("input#password").focus(); 
+                $("label#passwordLoginWrong").show();  
+                $("input#passwordLogin").focus(); 
             }
         }
     })

@@ -121,24 +121,31 @@
         </form>
     </dialog>
 
+    <!-- LOGIN PART -->
+
     <dialog id='login-dialog'>
         <form name="form" action="">
+
+            <!-- USERNAME -->
             <div class='form-group'>
-                <input type="text" name="username" id="username" placeholder='Username' value="" class="text-input form-control">
+                <input type="text" name="username" id="usernameLogin" placeholder='Username' value="" class="text-input form-control">
             </div>
-            <label class="error" for="username" id="username-error">This field is required</label>
+            <label class="error" for="username" id="usernameLoginError">This field is required</label>
+            <label class="error" id="usernameLoginWrong">Username not found</label>
+
+            <!-- PASSWORD -->
             <div id='form-group'>
-                <input type="password" name="password" id="password" value="" placeholder='Password' class="text-input form-control">
+                <input type="password" name="password" id="passwordLogin" value="" placeholder='Password' class="text-input form-control">
             </div>
-            <label class="error" for="password" id="password-error">This field is required</label>
+            <label class="error" for="password" id="passwordLoginError">This field is required</label>
+            <label class="error" id="passwordLoginWrong">Incorrect password</label>
+
             <div class="clearfix"></div>
             <div class='input-group' style='float:right'>
                 <button id="cancel-login-dialog" class='btn'>Cancel</button>
+                <!-- LOGIN BUTTON -->
                 <button type="submit" class="btn btn-primary" id='loginFormBtn'>Login</button>
             </div>
-
-            <h3 class="error" id="wrong-username">User not found</h3>
-            <h3 class="error" id="wrong-password">Wrong password</h3>
         </form>
     </dialog>
 
@@ -176,7 +183,7 @@
             <label class="error" for="match-password" id="passwordRegisterMatch">Passwords do not match</label>
 
             <label class="error" id="takenUsername">Username is taken</label>
-            
+
             <div class="clearfix"></div>
             <div class='input-group' style='float:right'>
                 <button id="cancel-register-dialog" class='btn'>Cancel</button>
