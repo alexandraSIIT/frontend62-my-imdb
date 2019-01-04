@@ -286,11 +286,12 @@ loginBtn.addEventListener('click', function(){
   }
 })
 
-var loginFormBtn = document.getElementById("loginFormBtn");
-loginFormBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  Login(dataString2);
-});
+// De ce sunt astea aici?
+// var loginFormBtn = document.getElementById("loginFormBtn");
+// loginFormBtn.addEventListener("click", function (event) {
+//   event.preventDefault();
+//   Login(dataString2);
+// });
 
 var registerBtn = document.getElementById('registerBtn');
 var registerDialog = document.getElementById('register-dialog');
@@ -305,8 +306,11 @@ registerBtn.addEventListener('click', function(){
   }
 })
 
-var registerFormBtn = document.getElementById("registerFormBtn");
-registerFormBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  Register(dataString);
-});
+
+
+// De ce sunt astea aici?
+// var registerFormBtn = document.getElementById("registerFormBtn");
+// registerFormBtn.addEventListener("click", function (event) {
+//   event.preventDefault();
+//   Register(dataString);
+// });

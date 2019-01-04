@@ -142,31 +142,48 @@
         </form>
     </dialog>
 
+    <!-- REGISTER PART -->
+
     <dialog id='register-dialog'>
         <form name="form" action="">
+
+            <!-- USERNAME -->
             <div class='form-group'>
                 <input type="text" name="usernameRegister" id="usernameRegister" placeholder='Username' class="text-input form-control">
             </div>
-            <label class="error" for="usernameRegister" id="usernameRegister-error">This field is required</label>
+            <label class="error" for="usernameRegister" id="usernameRegisterError">This field is required</label>
+
+            <!-- EMAIL -->
             <div class='form-group'>
                 <input type="text" name="email" id="email" placeholder='Email' class="text-input form-control">
             </div>
-            <label class="error" for="email" id="email-error">This field is required</label>
-            <label class="error" for="email" id="email-validation">Enter a valid e-mail address</label>
+            <label class="error" for="email" id="emailError">This field is required</label>
+            <label class="error" for="email" id="emailValidError">Enter a valid e-mail address</label>
+
+            <!-- PASSWORD -->
             <div id='form-group'>
                 <input type="password" name="password" id="passwordRegister" placeholder='Password' class="text-input form-control">
             </div>
+            <label class="error" for="password" id="passwordRegisterError">This field is required</label>
+
+            <!-- RE PASSWORD -->
             <div id='form-group'>
                 <input type="password" name="rePassword" id="rePasswordRegister" placeholder='Re-enter password' class="text-input form-control">
             </div>
-            <label class="error" for="password" id="passwordRegister-error">This field is required</label>
+            <label class="error" for="r-password" id="rePasswordRegisterError">This field is required</label>
+
+            <!-- NO MATCH PW -->
+            <label class="error" for="match-password" id="passwordRegisterMatch">Passwords do not match</label>
+
             <div class="clearfix"></div>
             <div class='input-group' style='float:right'>
                 <button id="cancel-register-dialog" class='btn'>Cancel</button>
+                <!-- REGISTER BUTTON -->
                 <button type="submit" class="btn btn-primary" id='registerFormBtn'>Register</button>
             </div>
 
-            <h3 class="error" id="taken-username">Username is taken</h3>
+            <label class="error" id="takenUsername">Username is taken</label>
+            <h4 class="error" id="takenUsername">Username is taken</h4>
         </form>
     </dialog>
     </form>
@@ -191,9 +208,10 @@
     <!-- </main> -->
     <!-- <footer>Created at 01/01/2019 by CodeForFood 62 Frontend Team</footer> -->
 
-    <script src="../views/home.js"></script>
-    <script src="../views/login.js"></script>
     <script src="../models/Auth.js"></script>
+    <script src="../views/home.js"></script>
+    <script src="../views/register.js"></script>
+    <script src="../views/login.js"></script>
 
 </body>
 

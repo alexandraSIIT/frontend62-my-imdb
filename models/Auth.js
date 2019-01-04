@@ -9,8 +9,8 @@ function Register(dataString) {
             localStorage.setItem("AccesToken", response.accessToken)
         },
         error: function() {
-            $("h3#taken-username").show();
-            $("input#username").focus();
+            $("label#takenUsername").show();
+            $("input#usernameRegister").focus();
         }
     })
 }
