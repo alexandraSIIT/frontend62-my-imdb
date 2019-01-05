@@ -1,4 +1,5 @@
 var movies = new Movies();
+var accesToken = localStorage.getItem('AccesToken');
 
 getMovies();
 function getMovies() {
@@ -173,6 +174,11 @@ addMovieBtn.addEventListener('click', function () {
     cancelDialogBtn.addEventListener('click', function (event) {
       event.preventDefault();
       addDialog.close();
+      document.getElementById('add-movie-form').reset();
+      titleNewMovie.style.border = '1px solid #ccc';
+      genreNewMovie.style.border = '1px solid #ccc';
+      yearNewMovie.style.border = '1px solid #ccc';
+      runtimeNewMovie.style.border = '1px solid #ccc';
     })
   }
 })
@@ -181,15 +187,17 @@ var addNewMovieBtn = document.getElementById("addNewMovieBtn");
 addNewMovieBtn.addEventListener("click", function (event) {
   event.preventDefault();
   addMovie();
+  document.getElementById('add-movie-form').reset();
 });
 
+var titleNewMovie = document.getElementById("title");
+var genreNewMovie = document.getElementById("genre");
+var yearNewMovie = document.getElementById("year");
+var runtimeNewMovie = document.getElementById("runtime");
+
 function addMovie() {
-  var titleNewMovie = document.getElementById("title");
   var posterNewMovie = document.getElementById("poster");
-  var genreNewMovie = document.getElementById("genre");
   var typeNewMovie = document.getElementById("type");
-  var yearNewMovie = document.getElementById("year");
-  var runtimeNewMovie = document.getElementById("runtime");
   var languageNewMovie = document.getElementById("language");
   var countryNewMovie = document.getElementById("country");
   var imdbRatingNewMovie = document.getElementById("imdb-rating");
@@ -212,6 +220,8 @@ function addMovie() {
     ).then(
       function (response) {
         addDialog.close();
+        document.getElementById('succes-alert-add-movie').style.display = 'block';
+        hideAlert('succes-alert-add-movie');
         removeExistentMovies();
         movies.getMovies(10, 0).then(function () {
           displayMovies(movies.items);
@@ -225,25 +235,25 @@ function addMovie() {
     if (titleNewMovie.value == '') {
       titleNewMovie.style.border = '2px solid red';
       titleNewMovie.addEventListener('keyup', function () {
-        titleNewMovie.style.border = 'none';
+        titleNewMovie.style.border = '1px solid #ccc';
       })
     }
     if (genreNewMovie.value == '') {
       genreNewMovie.style.border = '2px solid red';
       genreNewMovie.addEventListener('keyup', function () {
-        genreNewMovie.style.border = 'none';
+        genreNewMovie.style.border = '1px solid #ccc';
       })
     }
     if (yearNewMovie.value == '') {
       yearNewMovie.style.border = '2px solid red';
       yearNewMovie.addEventListener('keyup', function () {
-        yearNewMovie.style.border = 'none';
+        yearNewMovie.style.border = '1px solid #ccc';
       })
     }
     if (runtimeNewMovie.value == '') {
       runtimeNewMovie.style.border = '2px solid red';
       runtimeNewMovie.addEventListener('keyup', function () {
-        runtimeNewMovie.style.border = 'none';
+        runtimeNewMovie.style.border = '1px solid #ccc';
       })
     }
   }
@@ -275,42 +285,56 @@ function displayError(error) {
 
 var loginBtn = document.getElementById('loginBtn');
 var loginDialog = document.getElementById('login-dialog');
-loginBtn.addEventListener('click', function(){
+loginBtn.addEventListener('click', function () {
   loginDialog.showModal();
   if (loginDialog.open) {
     var cancelLoginDialogBtn = document.getElementById('cancel-login-dialog');
     cancelLoginDialogBtn.addEventListener('click', function (event) {
       event.preventDefault();
       loginDialog.close();
+      document.getElementById('login-form').reset();
     })
   }
 })
 
-// De ce sunt astea aici?
-// var loginFormBtn = document.getElementById("loginFormBtn");
-// loginFormBtn.addEventListener("click", function (event) {
-//   event.preventDefault();
-//   Login(dataString2);
-// });
-
 var registerBtn = document.getElementById('registerBtn');
 var registerDialog = document.getElementById('register-dialog');
-registerBtn.addEventListener('click', function(){
+registerBtn.addEventListener('click', function () {
   registerDialog.showModal();
   if (registerDialog.open) {
     var cancelRegisterDialogBtn = document.getElementById('cancel-register-dialog');
     cancelRegisterDialogBtn.addEventListener('click', function (event) {
       event.preventDefault();
       registerDialog.close();
+      document.getElementById('register-form').reset();
+      document.getElementById('usernameRegisterError').style.display = 'none';
+      document.getElementById('takenUsername').style.display = 'none';
+      document.getElementById('emailError').style.display = 'none';
+      document.getElementById('emailValidError').style.display = 'none';
+      document.getElementById('passwordRegisterError').style.display = 'none';
+      document.getElementById('rePasswordRegisterError').style.display = 'none';
+      document.getElementById('passwordRegisterMatch').style.display = 'none';
     })
   }
 })
 
+displayButtonsAfterLogin();
+function displayButtonsAfterLogin() {
+  if (accesToken) {
+    displayButtons();
+  }
+}
 
+function displayButtons() {
+  document.getElementById('logged-in').innerHTML = `<p>You are logged in as<strong>admin!</strong></p>`;
+  document.getElementById('loginBtn').style.display = 'none';
+  document.getElementById('registerBtn').style.display = 'none';
+  document.getElementById('logoutBtn').style.display = 'block';
+  document.getElementById('add-movie-button').style.display = 'block';
+}
 
-// De ce sunt astea aici?
-// var registerFormBtn = document.getElementById("registerFormBtn");
-// registerFormBtn.addEventListener("click", function (event) {
-//   event.preventDefault();
-//   Register(dataString);
-// });
+function hideAlert(alertId){
+  $(`#${alertId}`).fadeTo(2000, 500).slideUp(500, function(){
+      $(`#${alertId}`).slideUp(500);
+  });
+}

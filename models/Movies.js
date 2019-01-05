@@ -48,7 +48,7 @@ Movies.prototype.addMovieRequest = function (
         method: "POST",
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-Auth-Token': 'Jhy-RvIbM0DDkAImTO6CuUtEi3K99CwV'
+            'X-Auth-Token': accesToken
         },
         data: {
             Title: title.value,

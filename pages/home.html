@@ -20,9 +20,19 @@
 </head>
 
 <body>
+    <div class="alert alert-success fade in" id='success-alert-register' style='display:none'>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> User successfully created!
+    </div>
+    <div class="alert alert-success fade in" id='succes-alert-add-movie' style='display:none'>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> Movie successfully added!
+    </div>
     <nav class="navbar navbar-default navbar-expand-lg navbar-light">
         <div class="collapse navbar-collapse justify-content-start">
             <ul class="nav navbar-nav navbar-right ml-auto">
+                <li class='nav-item' id='logged-in'>
+                </li>
                 <li class="nav-item">
                     <button id='loginBtn' data-toggle="dropdown" class="btn nav-link dropdown-toggle" href="#"
                         aria-expanded="false">Login</button>
@@ -30,6 +40,10 @@
                 <li class="nav-item">
                     <button id='registerBtn' data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1"
                         href="#" aria-expanded="false">Sign up</button>
+                </li>
+                <li class="nav-item">
+                    <button id='logoutBtn' data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1"
+                        href="#" aria-expanded="false" style='display:none;'>Logout</button>
                 </li>
             </ul>
         </div>
@@ -50,9 +64,9 @@
         </div>
     </div>
 
-    <button id="add-movie-button">Add new movie</button>
+    <button id="add-movie-button" style='display:none;'>Add new movie</button>
     <dialog id="add-dialog">
-        <form class='container-fluid'>
+        <form class='container-fluid' id='add-movie-form'>
             <div class='form-group'>
                 <div class='col-sm-12'>
                     <label for='title' class='control-label'>Title*</label>
@@ -122,7 +136,7 @@
     </dialog>
 
     <dialog id='login-dialog'>
-        <form name="form" action="">
+        <form name="form" id='login-form'>
             <div class='form-group'>
                 <input type="text" name="username" id="username" placeholder='Username' value="" class="text-input form-control">
             </div>
@@ -144,36 +158,37 @@
 
     <!-- REGISTER PART -->
 
-    <dialog id='register-dialog'>
-        <form name="form" action="">
+    <dialog id='register-dialog' style='width:30%;height:50%;'>
+        <form name="form" id='register-form'>
 
             <!-- USERNAME -->
             <div class='form-group'>
                 <input type="text" name="usernameRegister" id="usernameRegister" placeholder='Username' class="text-input form-control">
             </div>
             <label class="error" for="usernameRegister" id="usernameRegisterError">This field is required</label>
+            <label class="error" id="takenUsername">Username is taken!</label>
 
             <!-- EMAIL -->
             <div class='form-group'>
                 <input type="text" name="email" id="email" placeholder='Email' class="text-input form-control">
             </div>
-            <label class="error" for="email" id="emailError">This field is required</label>
-            <label class="error" for="email" id="emailValidError">Enter a valid e-mail address</label>
+            <label class="error" for="email" id="emailError">This field is required!</label>
+            <label class="error" for="email" id="emailValidError">Enter a valid e-mail address!</label>
 
             <!-- PASSWORD -->
             <div id='form-group'>
                 <input type="password" name="password" id="passwordRegister" placeholder='Password' class="text-input form-control">
             </div>
-            <label class="error" for="password" id="passwordRegisterError">This field is required</label>
+            <label class="error" for="password" id="passwordRegisterError">This field is required!</label>
 
             <!-- RE PASSWORD -->
             <div id='form-group'>
                 <input type="password" name="rePassword" id="rePasswordRegister" placeholder='Re-enter password' class="text-input form-control">
             </div>
-            <label class="error" for="r-password" id="rePasswordRegisterError">This field is required</label>
+            <label class="error" for="r-password" id="rePasswordRegisterError">This field is required!</label>
 
             <!-- NO MATCH PW -->
-            <label class="error" for="match-password" id="passwordRegisterMatch">Passwords do not match</label>
+            <label class="error" for="match-password" id="passwordRegisterMatch">Passwords do not match!</label>
 
             <div class="clearfix"></div>
             <div class='input-group' style='float:right'>
@@ -181,9 +196,6 @@
                 <!-- REGISTER BUTTON -->
                 <button type="submit" class="btn btn-primary" id='registerFormBtn'>Register</button>
             </div>
-
-            <label class="error" id="takenUsername">Username is taken</label>
-            <h4 class="error" id="takenUsername">Username is taken</h4>
         </form>
     </dialog>
     </form>

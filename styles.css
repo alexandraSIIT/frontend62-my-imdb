@@ -87,3 +87,7 @@ a.active {
 .btn-primary {
     color: white !important;
 }
+
+.error {
+    color: red;
+}
