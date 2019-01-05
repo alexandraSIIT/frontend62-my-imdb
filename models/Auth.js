@@ -36,6 +36,11 @@ function Login(dataString2) {
             } else if (response.responseJSON.message == "Wrong password") {
                 $("h3#wrong-password").show();
                 $("input#password").focus();
+                $("label#usernameLoginWrong").show();  
+                $("input#usernameLogin").focus();
+            } else if (response.responseJSON.message == "Wrong password") {
+                $("label#passwordLoginWrong").show();  
+                $("input#passwordLogin").focus(); 
             }
         }
     })
