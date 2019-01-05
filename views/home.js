@@ -293,6 +293,10 @@ loginBtn.addEventListener('click', function () {
       event.preventDefault();
       loginDialog.close();
       document.getElementById('login-form').reset();
+      document.getElementById('usernameLoginError').style.display = 'none';
+      document.getElementById('usernameLoginWrong').style.display = 'none';
+      document.getElementById('passwordLoginError').style.display = 'none';
+      document.getElementById('passwordLoginWrong').style.display = 'none';
     })
   }
 })
@@ -326,11 +330,20 @@ function displayButtonsAfterLogin() {
 }
 
 function displayButtons() {
+  document.getElementById('logged-in').style.display = 'block';
   document.getElementById('logged-in').innerHTML = `<p>You are logged in as<strong>admin!</strong></p>`;
   document.getElementById('loginBtn').style.display = 'none';
   document.getElementById('registerBtn').style.display = 'none';
   document.getElementById('logoutBtn').style.display = 'block';
   document.getElementById('add-movie-button').style.display = 'block';
+}
+
+function hideButtonsAfterLogout() {
+  document.getElementById('logged-in').style.display = 'none';
+  document.getElementById('loginBtn').style.display = 'block';
+  document.getElementById('registerBtn').style.display = 'block';
+  document.getElementById('logoutBtn').style.display = 'none';
+  document.getElementById('add-movie-button').style.display = 'none';
 }
 
 function hideAlert(alertId){
