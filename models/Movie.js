@@ -26,7 +26,7 @@ var apiRootUrl = "https://ancient-caverns-16784.herokuapp.com/movies/";
 Movie.prototype.getMovieDetails = function() {
   var that = this;
   return $.ajax({
-    url: apiRootUrl + "5c162ac52f61900021f12941",
+    url: apiRootUrl + "5baa62368b5f4c002194c7b1",
     method: "GET"
   }).then(function(response) {
     console.log(response);
@@ -54,13 +54,13 @@ Movie.prototype.getMovieDetails = function() {
   });
 };
 
-updateMovieDetails = function (inputTitle){
+Movie.prototype.updateMovieDetails = function (){
+  var that = this
   return $.ajax({
-    url: apiRootUrl + response.results._id,
+    url: apiRootUrl + "5baa62368b5f4c002194c7ab",
     method: "PUT",
-    data: {Title: inputTitle,
-    Year: inputYear,
-    Rated: inputRated,
+    headers: {"x-auth-token":"Fy13Kls6XP4JQN7siNtQCFaGAEja_Fx5"},
+    data: {"Title": movie.title
     }
   })
 }

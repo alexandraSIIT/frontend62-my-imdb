@@ -1,4 +1,4 @@
-var movie = new Movie ();
+var movie = new Movie();
 
 movie.getMovieDetails().then(function(response){
     displayMovieDetails(response);
@@ -73,7 +73,9 @@ var editButton = document.querySelector (".edit");
 editButton.addEventListener("click", editMovieDetails)
 
 function editMovieDetails (event){
+
 var base = event.target.parentNode;
+$(".edit").remove();
 
 var inputTitle = document.createElement("input");
 base.appendChild(inputTitle);
@@ -81,44 +83,84 @@ inputTitle.value = movie.title;
 
 var inputYear = document.createElement("input");
 base.appendChild(inputYear);
-inputYear.value = document.querySelector(".year").innerText;
+inputYear.value = movie.year;
 
 var inputRated = document.createElement("input");
 base.appendChild(inputRated);
-inputRated.value = document.querySelector(".rated").innerText;
+inputRated.value = movie.rated;
 
 var inputRuntime = document.createElement("input");
-inputRuntime.value = document.querySelector(".runtime").innerText;
+inputRuntime.value = movie.runtime;
+base.appendChild(inputRuntime);
 
 var inputGenre = document.createElement("input");
-inputGenre.value = document.querySelector(".genre").innerText;
+inputGenre.value = movie.genre;
+base.appendChild(inputGenre);
 
 var inputDirector = document.createElement("input");
-inputDirector.value = document.querySelector(".director").innerText;
+inputDirector.value = movie.director;
+base.appendChild(inputDirector);
 
 var inputWriter = document.createElement("input");
-inputWriter.value = document.querySelector(".writer").innerText;
+inputWriter.value = movie.writer;
+base.appendChild(inputWriter);
 
 var inputActors = document.createElement("input");
-inputActors.value = document.querySelector(".actors").innerText;
+inputActors.value = movie.actors;
+base.appendChild(inputActors);
 
 var inputPlot = document.createElement("input");
-inputPlot.value = document.querySelector(".plot").innerText;
+inputPlot.value = movie.plot;
+base.appendChild(inputPlot);
 
 var inputLanguage = document.createElement("input");
-inputLanguage.value = document.querySelector(".language").innerText;
+inputLanguage.value = movie.language;
+base.appendChild(inputLanguage);
 
 var inputCountry = document.createElement("input");
-inputCountry.value = document.querySelector(".country").innerText;
+inputCountry.value = movie.country;
+base.appendChild(inputCountry);
 
 var inputAwards = document.createElement("input");
-inputAwards.value = document.querySelector(".awards").innerText;
+inputAwards.value = movie.awards;
+base.appendChild(inputAwards);
+
+var inputPoster = document.createElement("input");
+inputPoster.value = movie.poster;
+base.appendChild(inputPoster);
+
+var inputMetascore = document.createElement("input");
+inputMetascore.value = movie.metascore;
+base.appendChild(inputMetascore);
+
+var inputRating = document.createElement("input");
+inputRating.value = movie.rating;
+base.appendChild(inputRating);
+
+var inputType = document.createElement("input");
+inputType.value = movie.type;
+base.appendChild(inputType);
+
+var inputDvd = document.createElement("input");
+inputDvd.value = movie.dvd;
+base.appendChild(inputDvd);
+
+var inputBoxOffice = document.createElement("input");
+inputBoxOffice.value = movie.boxOffice;
+base.appendChild(inputBoxOffice);
+
+var inputProduction = document.createElement("input");
+inputProduction.value = movie.production;
+base.appendChild(inputProduction);
 
 var updateButton = document.createElement("button");
   updateButton.innerText = "Update";
  base.appendChild(updateButton);
 
  updateButton.addEventListener("click", function (){
-     updateMovieDetails()
+     var movie = new Movie({
+         title: inputTitle
+     });
+     movie.updateMovieDetails().then(getMovieDetails())
  })
 }
