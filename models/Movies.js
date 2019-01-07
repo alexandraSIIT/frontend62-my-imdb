@@ -1,3 +1,5 @@
+var accesToken = localStorage.getItem('AccesToken');
+
 function Movies() {
     this.items = [];
     this.numberOfPages = 0;
@@ -65,3 +67,13 @@ Movies.prototype.addMovieRequest = function (
         }
     })
 }
+
+Movies.prototype.deleteMovie = function (movieId) {
+    return $.ajax({
+      headers: {
+        'X-Auth-Token': accesToken
+    },
+      url: movieUrl + '/' + movieId,
+      method: "DELETE",
+    });
+  }

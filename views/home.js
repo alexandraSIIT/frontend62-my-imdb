@@ -1,5 +1,4 @@
 var movies = new Movies();
-var accesToken = localStorage.getItem('AccesToken');
 
 getMovies();
 function getMovies() {
@@ -46,20 +45,21 @@ function displayMovies(response) {
     // movieYearElement.innerHTML = response[i].year;
 
 
-    //   var deleteButton = gameClone.querySelector(".game-delete");
-    //   deleteButton.addEventListener("click", function(event) {
-    //     console.log("event", event);
-    //     // event.target = the button that we clicked
-    //     // the clicked button has a div as parent, and that has the article as parent
-    //     var grandpa = event.target.parentNode.parentNode; // the article
-    //     var grandpaId = grandpa.id; // article_3
-    //     var gameId = grandpaId.replace("game_", ""); // 3
-    //     // call delete article request from model
-    //     var game = new Game({ id: gameId });
-    //     game.deleteGame().then(function() {
-    //       removeGameFromDOM(response, grandpa);
-    //     });
-    //   });
+    var deleteButton = movieClone.querySelector(".movie-delete");
+    deleteButton.addEventListener("click", function (event) {
+      console.log("event", event);
+      // // event.target = the button that we clicked
+      // // the clicked button has a div as parent, and that has the article as parent
+      var grandpa = event.target.parentNode.parentNode; 
+      var grandpaId = grandpa.id; 
+      var movieId = grandpaId.replace("movie_", ""); // 3
+      movies.deleteMovie(movieId).then(function () {
+        removeExistentMovies();
+        movies.getMovies(10, 0).then(function () {
+          displayMovies(movies.items);
+        });
+      });
+    });
 
     //   var editButton = gameClone.querySelector(".game-edit");
     //   editButton.addEventListener("click", updateGameOnClick);
@@ -346,8 +346,8 @@ function hideButtonsAfterLogout() {
   document.getElementById('add-movie-button').style.display = 'none';
 }
 
-function hideAlert(alertId){
-  $(`#${alertId}`).fadeTo(2000, 500).slideUp(500, function(){
-      $(`#${alertId}`).slideUp(500);
+function hideAlert(alertId) {
+  $(`#${alertId}`).fadeTo(2000, 500).slideUp(500, function () {
+    $(`#${alertId}`).slideUp(500);
   });
 }
