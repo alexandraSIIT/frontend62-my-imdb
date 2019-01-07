@@ -13,17 +13,47 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <header class="mainheader row">
-        <h4>Welcome to the new movies database!</h4>
-    </header>
+    <div class="alert alert-success fade in" id='success-alert-register' style='display:none'>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> User successfully created!
+    </div>
+    <div class="alert alert-success fade in" id='success-alert-login' style='display:none'>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> User successfully logged in!
+    </div>
+    <div class="alert alert-success fade in" id='success-alert-logout' style='display:none'>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> User successfully logged out!
+    </div>
+    <div class="alert alert-success fade in" id='succes-alert-add-movie' style='display:none'>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> Movie successfully added!
+    </div>
+    <nav class="navbar navbar-default navbar-expand-lg navbar-light">
+        <div class="collapse navbar-collapse justify-content-start">
+            <ul class="nav navbar-nav navbar-right ml-auto">
+                <li class='nav-item' id='logged-in'>
+                </li>
+                <li class="nav-item">
+                    <button id='loginBtn' data-toggle="dropdown" class="btn nav-link dropdown-toggle" href="#"
+                        aria-expanded="false">Login</button>
+                </li>
+                <li class="nav-item">
+                    <button id='registerBtn' data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1"
+                        href="#" aria-expanded="false">Register</button>
+                </li>
+                <li class="nav-item">
+                    <button id='logoutBtn' data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1"
+                        href="#" aria-expanded="false" style='display:none;'>Logout</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="search-header">
-        <!-- <img
-      src=https://static.posters.cz/image/750/poster/juego-de-tronos-game-of-thrones-logo-i21034.jpg height="200" width="800"
-          > -->
-        <!-- <img src='../logo2.jpg' > -->
         <div class="inline search-box">
             <h4>Search movies</h4>
             <select id="search-category">
@@ -38,26 +68,154 @@
             <button id="search-button" class="fa fa-search"></button>
         </div>
     </div>
-    <!-- <h6 class="register">Register</h6> -->
-    <!-- <h6 class="login">Login</h6> -->
-    <!-- <nav class="row">
-                    <ul class="buttons">
-                      <li>About</li>
-                      <li>Top Ten</li>
-                      <li>Cinema City</li>
-                      <li>Contact</li>
-                    </ul>
-                  </nav> -->
-    <!-- <main> -->
-    <!-- <article class="col-md-8 col-xl-9"> -->
-    <!-- <header class="article-header"><h2>What's your ultimate  movie experience?</h2></header> -->
-    <!-- <h3>Prepare for the best movies!</h3> -->
+
+    <button id="add-movie-button" style='display:none;'>Add new movie</button>
+    <dialog id="add-dialog">
+        <form class='container-fluid' id='add-movie-form'>
+            <div class='form-group'>
+                <div class='col-sm-12'>
+                    <label for='title' class='control-label'>Title*</label>
+                    <input id='title' class='form-control'>
+                </div>
+
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-12'>
+                    <label for='poster' class='control-label'>Poster</label>
+                    <input id='poster' class='form-control'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-6'>
+                    <label for='genre' class='control-label'>Genre*</label>
+                    <input id='genre' class='form-control'>
+                </div>
+                <div class='col-sm-6'>
+                    <label for='type' class='control-label'>Type</label>
+                    <input id='type' class='form-control'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-6'>
+                    <label for='yer' class='control-label'>Year*</label>
+                    <input id='year' class='form-control'>
+                </div>
+                <div class='col-sm-6'>
+                    <label for='runtime' class='control-label'>Runtime*</label>
+                    <input id='runtime' class='form-control'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-6'>
+                    <label for='language' class='control-label'>Language</label>
+                    <input id='language' class='form-control'>
+                </div>
+                <div class='col-sm-6'>
+                    <label for='country' class='control-label'>Country</label>
+                    <input id='country' class='form-control'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-6'>
+                    <label for='imdbRating' class='control-label'>Imdb Rating</label>
+                    <input id='imdb-rating' class='form-control'>
+                </div>
+                <div class='col-sm-6'>
+                    <label for='imdb votes' class='control-label'>Imdb Votes</label>
+                    <input id='imdb-votes' class='form-control'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-sm-6'>
+                    <label for='imdbId' class='control-label'>Imdb ID</label>
+                    <input id='imdb-id' class='form-control'>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class='input-group' style='float:right'>
+                <button id="cancel-dialog" class='btn'>Cancel</button>
+                <button type="submit" class="btn btn-primary" id='addNewMovieBtn'>Save</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- LOGIN PART -->
+
+    <dialog id='login-dialog'>
+        <form name="form" id='login-form'>
+            <!-- USERNAME -->
+            <div class='form-group'>
+                <input type="text" name="username" id="usernameLogin" placeholder='Username' value="" class="text-input form-control">
+            </div>
+            <label class="error" for="username" id="usernameLoginError">This field is required</label>
+            <label class="error" id="usernameLoginWrong">Username not found</label>
+
+            <!-- PASSWORD -->
+            <div id='form-group'>
+                <input type="password" name="password" id="passwordLogin" value="" placeholder='Password' class="text-input form-control">
+            </div>
+            <label class="error" for="password" id="passwordLoginError">This field is required</label>
+            <label class="error" id="passwordLoginWrong">Incorrect password</label>
+
+            <div class="clearfix"></div>
+            <div class='input-group' style='float:right'>
+                <button id="cancel-login-dialog" class='btn'>Cancel</button>
+                <!-- LOGIN BUTTON -->
+                <button type="submit" class="btn btn-primary" id='loginFormBtn'>Login</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- REGISTER PART -->
+
+    <dialog id='register-dialog' style='width:30%;height:50%;'>
+        <form name="form" id='register-form'>
+            <!-- USERNAME -->
+            <div class='form-group'>
+                <input type="text" name="usernameRegister" id="usernameRegister" placeholder='Username' class="text-input form-control">
+            </div>
+            <label class="error" for="usernameRegister" id="usernameRegisterError">This field is required</label>
+            <label class="error" id="takenUsername">Username is taken!</label>
+
+            <!-- EMAIL -->
+            <div class='form-group'>
+                <input type="text" name="email" id="email" placeholder='Email' class="text-input form-control">
+            </div>
+            <label class="error" for="email" id="emailError">This field is required!</label>
+            <label class="error" for="email" id="emailValidError">Enter a valid e-mail address!</label>
+
+            <!-- PASSWORD -->
+            <div id='form-group'>
+                <input type="password" name="password" id="passwordRegister" placeholder='Password' class="text-input form-control">
+            </div>
+            <label class="error" for="password" id="passwordRegisterError">This field is required!</label>
+
+            <!-- RE PASSWORD -->
+            <div id='form-group'>
+                <input type="password" name="rePassword" id="rePasswordRegister" placeholder='Re-enter password' class="text-input form-control">
+            </div>
+            <label class="error" for="r-password" id="rePasswordRegisterError">This field is required!</label>
+
+            <!-- NO MATCH PW -->
+            <label class="error" for="match-password" id="passwordRegisterMatch">Passwords do not match!</label>
+
+            <div class="clearfix"></div>
+            <div class='input-group' style='float:right'>
+                <button id="cancel-register-dialog" class='btn'>Cancel</button>
+                <!-- REGISTER BUTTON -->
+                <button type="submit" class="btn btn-primary" id='registerFormBtn'>Register</button>
+            </div>
+        </form>
+    </dialog>
+    </form>
+
     <div id="movies"></div>
     <div id="template" class="template container-fluid">
         <img class="myImage row">
         <div class="inline row" style="width:100%">
-            <div class="movie-title col-10"></div>
-            <div class="rating col-2"></div>
+            <div class="movie-title" style='cursor:pointer;'></div>
+            <div class="rating"></div>
         </div>
         <!-- <p class="genre"></p> -->
         <!-- <p class="year"></p> -->
@@ -72,8 +230,11 @@
     <!-- </main> -->
     <!-- <footer>Created at 01/01/2019 by CodeForFood 62 Frontend Team</footer> -->
 
+    <script src="../models/Auth.js"></script>
     <script src="../views/home.js"></script>
-
+    <script src="../views/register.js"></script>
+    <script src="../views/login.js"></script>
+    <script src="../views/logout.js"></script>
 </body>
 
 </html>

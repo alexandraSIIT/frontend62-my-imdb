@@ -57,10 +57,29 @@ Movie.prototype.getMovieDetails = function() {
 Movie.prototype.updateMovieDetails = function (){
   var that = this
   return $.ajax({
-    url: apiRootUrl + "5baa62368b5f4c002194c7ab",
+    url: apiRootUrl + "5baa62368b5f4c002194c7b1",
     method: "PUT",
-    headers: {"x-auth-token":"Fy13Kls6XP4JQN7siNtQCFaGAEja_Fx5"},
-    data: {"Title": movie.title
-    }
+    headers: {"x-auth-token":"0Vx0NmbZgdiI20DBANk1PtT1mFIKIkqL"},
+    data: { Title: that.title,
+    Year: that.year,
+    Rated: that.rated,
+    Runtime: that.runtime,
+    Genre: that.genre,
+    Director: that.director,
+    Writer: that.writer,
+    Actors: that.actors,
+    Plot: that.plot,
+    Language: that.language,
+    Country: that.country,
+    Awards: that.awards,
+    Poster: that.poster,
+    Metascore: that.metascore,
+    imdbRating: that.rating,
+    Type: that.type,
+    DVD: that.dvd,
+    BoxOffice: that.boxOffice,
+    Production: that.production
+    },
+    processData: false
   })
 }

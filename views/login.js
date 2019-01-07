@@ -1,22 +1,23 @@
+var dataString2;
+
 $(function() {
     $(".error").hide();
-    $(".login-button").click(function() {
+    $("#loginFormBtn").click(function() {
         $(".error").hide();
-        var name = $("input#username").val();
-        if (name == "") {
-            $("label#username-error").show();
-            $("input#username").focus();
+        var username = $("input#usernameLogin").val();
+        if (username == "") {
+            $("label#usernameLoginError").show();
+            $("input#usernameLogin").focus();
             return false;
         }
 
-        var password = $("input#password").val();
+        var password = $("input#passwordLogin").val();
         if (password == "") {
-            $("label#password-error").show();
-            $("input#password").focus();
+            $("label#passwordLoginError").show();
+            $("input#passwordLogin").focus();
             return false;
         }
-        console.log("click")
-        var dataString2 = "username=" + name + "&password=" + password;
+        dataString2 = "username=" + username + "&password=" + password;
         Login(dataString2);
         return false;
     });

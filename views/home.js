@@ -1,9 +1,11 @@
 var movies = new Movies();
+var accesToken = localStorage.getItem('AccesToken');
 
 getMovies();
 function getMovies() {
   movies.getMovies(10, 0).then(function () {
     displayMovies(movies.items);
+    console.log(movies.items)
   });
 }
 
@@ -23,8 +25,15 @@ function displayMovies(response) {
 
     var movieTitleElement = movieClone.querySelector(".movie-title");
     movieTitleElement.innerHTML = response[i].title;
+
+    let movie = response[i];
+    movieTitleElement.addEventListener("click", function (event) {
+
+      getMovieDetails(event.target, movie);
+      location.href = "/pages/movieDetails.html?id=" + movie.id;
+    })
     var imageUrl = movieClone.querySelector(".myImage");
-    if (response[i].poster == 'N/A') {
+    if (response[i].poster == 'N/A' || response[i].poster == '') {
       imageUrl.setAttribute("src", '../movie-default-image.jpg');
     } else {
       imageUrl.setAttribute("src", response[i].poster);
@@ -126,7 +135,7 @@ function addPagination(category, searchValue) {
     });
   });
   pagination.appendChild(firstPageBtn);
-  
+
   for (var i = 1; i <= movies.numberOfPages; i++) {
     anchor = document.createElement('a');
     anchor.innerHTML = i;
@@ -154,4 +163,191 @@ function addPagination(category, searchValue) {
     });
   });
   pagination.appendChild(lastPageBtn);
+}
+
+var addMovieBtn = document.getElementById('add-movie-button');
+var addDialog = document.getElementById('add-dialog');
+addMovieBtn.addEventListener('click', function () {
+  addDialog.showModal();
+  if (addDialog.open) {
+    var cancelDialogBtn = document.getElementById('cancel-dialog');
+    cancelDialogBtn.addEventListener('click', function (event) {
+      event.preventDefault();
+      addDialog.close();
+      document.getElementById('add-movie-form').reset();
+      titleNewMovie.style.border = '1px solid #ccc';
+      genreNewMovie.style.border = '1px solid #ccc';
+      yearNewMovie.style.border = '1px solid #ccc';
+      runtimeNewMovie.style.border = '1px solid #ccc';
+    })
+  }
+})
+
+var addNewMovieBtn = document.getElementById("addNewMovieBtn");
+addNewMovieBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  addMovie();
+  document.getElementById('add-movie-form').reset();
+});
+
+var titleNewMovie = document.getElementById("title");
+var genreNewMovie = document.getElementById("genre");
+var yearNewMovie = document.getElementById("year");
+var runtimeNewMovie = document.getElementById("runtime");
+
+function addMovie() {
+  var posterNewMovie = document.getElementById("poster");
+  var typeNewMovie = document.getElementById("type");
+  var languageNewMovie = document.getElementById("language");
+  var countryNewMovie = document.getElementById("country");
+  var imdbRatingNewMovie = document.getElementById("imdb-rating");
+  var imdbVotesNewMovie = document.getElementById("imdb-votes");
+  var imdbIdNewMovie = document.getElementById("imdb-id");
+
+  if (titleNewMovie.value && genreNewMovie.value && yearNewMovie.value && runtimeNewMovie.value) {
+    movies.addMovieRequest(
+      titleNewMovie,
+      posterNewMovie,
+      genreNewMovie,
+      typeNewMovie,
+      yearNewMovie,
+      runtimeNewMovie,
+      languageNewMovie,
+      countryNewMovie,
+      imdbRatingNewMovie,
+      imdbVotesNewMovie,
+      imdbIdNewMovie
+    ).then(
+      function (response) {
+        addDialog.close();
+        document.getElementById('succes-alert-add-movie').style.display = 'block';
+        hideAlert('succes-alert-add-movie');
+        removeExistentMovies();
+        movies.getMovies(10, 0).then(function () {
+          displayMovies(movies.items);
+        });
+      },
+      function (error) {
+        displayError(error);
+      }
+    );
+  } else {
+    if (titleNewMovie.value == '') {
+      titleNewMovie.style.border = '2px solid red';
+      titleNewMovie.addEventListener('keyup', function () {
+        titleNewMovie.style.border = '1px solid #ccc';
+      })
+    }
+    if (genreNewMovie.value == '') {
+      genreNewMovie.style.border = '2px solid red';
+      genreNewMovie.addEventListener('keyup', function () {
+        genreNewMovie.style.border = '1px solid #ccc';
+      })
+    }
+    if (yearNewMovie.value == '') {
+      yearNewMovie.style.border = '2px solid red';
+      yearNewMovie.addEventListener('keyup', function () {
+        yearNewMovie.style.border = '1px solid #ccc';
+      })
+    }
+    if (runtimeNewMovie.value == '') {
+      runtimeNewMovie.style.border = '2px solid red';
+      runtimeNewMovie.addEventListener('keyup', function () {
+        runtimeNewMovie.style.border = '1px solid #ccc';
+      })
+    }
+  }
+}
+
+function getMovieDetails(clickedButton, movieObject) {
+  console.log(clickedButton);
+  var grandpa = clickedButton.parentNode.parentNode;
+  var grandpaId = grandpa.id;
+  var movieId = grandpaId.replace("movie_", "");
+  console.log(movieId)
+
+
+  movieObject.getMovieDetails(movieId).then(
+    function (response) {
+      // displayGamesDetails(response);
+      console.log(response)
+    },
+    function (error) {
+      displayError(error);
+    }
+  );
+}
+
+function displayError(error) {
+  console.log("ADD movie request was rejected with status ",
+    error.status);
+}
+
+var loginBtn = document.getElementById('loginBtn');
+var loginDialog = document.getElementById('login-dialog');
+loginBtn.addEventListener('click', function () {
+  loginDialog.showModal();
+  if (loginDialog.open) {
+    var cancelLoginDialogBtn = document.getElementById('cancel-login-dialog');
+    cancelLoginDialogBtn.addEventListener('click', function (event) {
+      event.preventDefault();
+      loginDialog.close();
+      document.getElementById('login-form').reset();
+      document.getElementById('usernameLoginError').style.display = 'none';
+      document.getElementById('usernameLoginWrong').style.display = 'none';
+      document.getElementById('passwordLoginError').style.display = 'none';
+      document.getElementById('passwordLoginWrong').style.display = 'none';
+    })
+  }
+})
+
+var registerBtn = document.getElementById('registerBtn');
+var registerDialog = document.getElementById('register-dialog');
+registerBtn.addEventListener('click', function () {
+  registerDialog.showModal();
+  if (registerDialog.open) {
+    var cancelRegisterDialogBtn = document.getElementById('cancel-register-dialog');
+    cancelRegisterDialogBtn.addEventListener('click', function (event) {
+      event.preventDefault();
+      registerDialog.close();
+      document.getElementById('register-form').reset();
+      document.getElementById('usernameRegisterError').style.display = 'none';
+      document.getElementById('takenUsername').style.display = 'none';
+      document.getElementById('emailError').style.display = 'none';
+      document.getElementById('emailValidError').style.display = 'none';
+      document.getElementById('passwordRegisterError').style.display = 'none';
+      document.getElementById('rePasswordRegisterError').style.display = 'none';
+      document.getElementById('passwordRegisterMatch').style.display = 'none';
+    })
+  }
+})
+
+displayButtonsAfterLogin();
+function displayButtonsAfterLogin() {
+  if (accesToken) {
+    displayButtons();
+  }
+}
+
+function displayButtons() {
+  document.getElementById('logged-in').style.display = 'block';
+  document.getElementById('logged-in').innerHTML = `<p>You are logged in as<strong>admin!</strong></p>`;
+  document.getElementById('loginBtn').style.display = 'none';
+  document.getElementById('registerBtn').style.display = 'none';
+  document.getElementById('logoutBtn').style.display = 'block';
+  document.getElementById('add-movie-button').style.display = 'block';
+}
+
+function hideButtonsAfterLogout() {
+  document.getElementById('logged-in').style.display = 'none';
+  document.getElementById('loginBtn').style.display = 'block';
+  document.getElementById('registerBtn').style.display = 'block';
+  document.getElementById('logoutBtn').style.display = 'none';
+  document.getElementById('add-movie-button').style.display = 'none';
+}
+
+function hideAlert(alertId){
+  $(`#${alertId}`).fadeTo(2000, 500).slideUp(500, function(){
+      $(`#${alertId}`).slideUp(500);
+  });
 }

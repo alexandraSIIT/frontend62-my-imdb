@@ -4,13 +4,18 @@ function Register(dataString) {
         type: "POST",
         url: url + "auth/register",
         data: dataString,
-        success: function(response) {
+        success: function (response) {
             console.log(response)
-            localStorage.setItem("AccesToken", response.accessToken)
+            localStorage.setItem("AccesToken", response.accessToken);
+            document.getElementById('register-dialog').close();
+            document.getElementById('success-alert-register').style.display = 'block';
+            hideAlert('success-alert-register');
+            document.getElementById('register-form').reset();
+            displayButtons();
         },
-        error: function() {
-            $("h3#taken-username").show();
-            $("input#username").focus();
+        error: function () {
+            $("label#takenUsername").show();
+            $("input#usernameRegister").focus();
         }
     })
 }
@@ -18,11 +23,25 @@ function Register(dataString) {
 function Login(dataString2) {
     $.ajax({
         type: "POST",
-        url: url +"auth/login",
+        url: url + "auth/login",
         data: dataString2,
-        success: function(response) {
+        success: function (response) {
             console.log(response)
-            localStorage.setItem("AccesToken", response.accessToken)
+            localStorage.setItem("AccesToken", response.accessToken);
+            document.getElementById('login-dialog').close();
+            document.getElementById('success-alert-login').style.display = 'block';
+            hideAlert('success-alert-login');
+            document.getElementById('login-form').reset();
+            displayButtons();
+        },
+        error: function (response) {
+            if (response.responseJSON.message == "User not found") {
+                $("label#usernameLoginWrong").show();
+                $("input#usernameLogin").focus();
+            } else if (response.responseJSON.message == "Wrong password") {
+                $("label#passwordLoginWrong").show();
+                $("input#passwordLogin").focus();
+            }
         }
     })
 }
@@ -34,8 +53,14 @@ function Logout(token) {
         headers: {
             "x-auth-token": token
         },
-        success: function(response) {
+        success: function (response) {
             console.log(response);
+            localStorage.removeItem('AccesToken');
+            document.getElementById('success-alert-logout').style.display = 'block';
+            hideAlert('success-alert-logout');
+            hideButtonsAfterLogout();
         }
     })
+
 }
+
