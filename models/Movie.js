@@ -23,10 +23,10 @@ function Movie(options = {}) {
 
 var apiRootUrl = "https://ancient-caverns-16784.herokuapp.com/movies/";
 
-Movie.prototype.getMovieDetails = function(id) {
+Movie.prototype.getMovieDetails = function() {
   var that = this;
   return $.ajax({
-    url: apiRootUrl + id,
+    url: apiRootUrl + "5baa62368b5f4c002194c7b1",
     method: "GET"
   }).then(function(response) {
     console.log(response);
@@ -54,13 +54,32 @@ Movie.prototype.getMovieDetails = function(id) {
   });
 };
 
-updateMovieDetails = function (inputTitle){
+Movie.prototype.updateMovieDetails = function (){
+  var that = this
   return $.ajax({
-    url: apiRootUrl + response.results._id,
+    url: apiRootUrl + "5baa62368b5f4c002194c7b1",
     method: "PUT",
-    data: {Title: inputTitle,
-    Year: inputYear,
-    Rated: inputRated,
-    }
+    headers: {"x-auth-token":"0Vx0NmbZgdiI20DBANk1PtT1mFIKIkqL"},
+    data: { Title: that.title,
+    Year: that.year,
+    Rated: that.rated,
+    Runtime: that.runtime,
+    Genre: that.genre,
+    Director: that.director,
+    Writer: that.writer,
+    Actors: that.actors,
+    Plot: that.plot,
+    Language: that.language,
+    Country: that.country,
+    Awards: that.awards,
+    Poster: that.poster,
+    Metascore: that.metascore,
+    imdbRating: that.rating,
+    Type: that.type,
+    DVD: that.dvd,
+    BoxOffice: that.boxOffice,
+    Production: that.production
+    },
+    processData: false
   })
 }
