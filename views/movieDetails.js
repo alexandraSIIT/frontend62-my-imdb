@@ -2,7 +2,7 @@ var movie = new Movie ();
 movie.id = getUrlParameter('id');
 
 movie.getMovieDetails(movie.id).then(function(response){
-    displayMovieTitle(response)
+    // displayMovieTitle(response)
     displayMovieDetails(response);
 })
 
@@ -87,7 +87,7 @@ function displayMovieDetails (response){
 }
 
 var modal = document.getElementById('editMovieModal');
-var editButton = document.querySelector (".edit");
+var editButton = document.querySelector (".edit")[0];
 editButton.onclick = function() {
     modal.style.display = "block";
     var inputTitle = document.getElementById("editTitle");
@@ -148,32 +148,33 @@ editButton.onclick = function() {
     inputProduction.value = movie.production;
 
     var updateButton = document.querySelector(".submit-updates")
-    updateButton.onclick = function (event){
-        event.preventDefault();
-    
-                 var movie = new Movie({
-                     title: inputTitle.value,
-                     year: inputYear.value,
-                     rated: inputRated,
-                     runtime: inputRuntime,
-                     genre: inputGenre,
-                     director: inputDirector,
-                     writer: inputWriter,
-                     actors: inputActors,
-                     plot: inputPlot,
-                     language: inputLanguage,
-                     country: inputCountry,
-                     awards: inputAwards,
-                     poster: inputPoster,
-                     metascore: inputMetascore,
-                     rating: inputRating,
-                     type: inputType,
-                     dvd: inputDvd,
-                     boxOffice: inputBoxOffice,
-                     production: inputProduction
-                 });
-                movie.updateMovieDetails()
-             }
+      updateButton.onclick = function (event){
+          event.preventDefault();
+          var inputNewTitle = document.getElementById("editTitle");
+          inputNewTitle.value = document.getElementById("editTitle").innerText;
+                    var movie = new Movie({
+                       title: inputNewTitle.value,
+                       year: inputYear.value,
+                       rated: inputRated,
+                       runtime: inputRuntime,
+                       genre: inputGenre,
+                       director: inputDirector,
+                       writer: inputWriter,
+                       actors: inputActors,
+                       plot: inputPlot,
+                       language: inputLanguage,
+                       country: inputCountry,
+                       awards: inputAwards,
+                       poster: inputPoster,
+                       metascore: inputMetascore,
+                       rating: inputRating,
+                       type: inputType,
+                       dvd: inputDvd,
+                       boxOffice: inputBoxOffice,
+                       production: inputProduction
+                   });
+                  movie.updateMovieDetails(movie.id)
+               }
 
 }
 
@@ -189,3 +190,4 @@ var closeButton = document.querySelector(".close");
       }
 
 
+      
