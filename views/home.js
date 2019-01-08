@@ -42,22 +42,34 @@ function displayMovies(response) {
     // var movieYearElement = movieClone.querySelector(".year");
     // movieYearElement.innerHTML = response[i].year;
 
-
     var deleteButton = movieClone.querySelector(".movie-delete");
+    var confirmDialog = document.getElementById('confirm-dialog');
     deleteButton.addEventListener("click", function (event) {
-      console.log("event", event);
-      // // event.target = the button that we clicked
-      // // the clicked button has a div as parent, and that has the article as parent
       var grandpa = event.target.parentNode.parentNode;
       var grandpaId = grandpa.id;
-      var movieId = grandpaId.replace("movie_", ""); // 3
-      movies.deleteMovie(movieId).then(function () {
-        removeExistentMovies();
-        movies.getMovies(10, 0).then(function () {
-          displayMovies(movies.items);
-        });
-      });
-    });
+      var movieId = grandpaId.replace("movie_", "");
+      confirmDialog.showModal();
+      if (confirmDialog.open) {
+        var cancelConfirmDialogBtn = document.getElementById('cancel-confirm-dialog');
+        cancelConfirmDialogBtn.addEventListener('click', function (event) {
+          event.preventDefault();
+          confirmDialog.close();
+        })
+        var confirmDelete = document.getElementById("confirmDelete");
+        confirmDelete.addEventListener("click", function (event) {
+          event.preventDefault();
+          movies.deleteMovie(movieId).then(function () {
+            confirmDialog.close();
+            removeExistentMovies();
+            document.getElementById('succes-alert-delete-movie').style.display = 'block';
+            hideAlert('succes-alert-delete-movie');
+            movies.getMovies(10, 0).then(function () {
+              displayMovies(movies.items);
+            });
+          });
+        })
+      }
+    })
 
     //   var editButton = gameClone.querySelector(".game-edit");
     //   editButton.addEventListener("click", updateGameOnClick);
@@ -350,7 +362,7 @@ function hideButtonsAfterLogout() {
   document.getElementById('registerBtn').style.display = 'block';
   document.getElementById('logoutBtn').style.display = 'none';
   document.getElementById('add-movie-button').style.display = 'none';
- 
+
   Array.from(document.getElementsByClassName('movie-edit')).forEach(function (btn) {
     btn.style.display = 'none';
   });
