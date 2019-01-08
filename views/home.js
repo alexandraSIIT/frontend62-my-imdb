@@ -27,7 +27,8 @@ function displayMovies(response) {
     movieTitleElement.addEventListener("click", function (event) {
 
       getMovieDetails(event.target, movie);
-      location.href = "/pages/movieDetails.html?id=" + movie.id;
+      window.open("/pages/movieDetails.html?id=" + movie.id,
+      '_blank');
     })
     var imageUrl = movieClone.querySelector(".myImage");
     if (response[i].poster == 'N/A' || response[i].poster == '') {
