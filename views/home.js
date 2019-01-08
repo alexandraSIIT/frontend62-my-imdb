@@ -11,10 +11,8 @@ function getMovies() {
 var template = document.getElementById("template");
 function displayMovies(response) {
   var moviesContainer = document.getElementById("movies");
-  // traverse the array (parcurgerea sirului)
   for (var i = 0; i < response.length; i++) {
 
-    // clone the template; copy template's children as well (deep parameter = true)
     var movieClone = template.cloneNode(true);
     // set a unique id for each article
 
@@ -50,8 +48,8 @@ function displayMovies(response) {
       console.log("event", event);
       // // event.target = the button that we clicked
       // // the clicked button has a div as parent, and that has the article as parent
-      var grandpa = event.target.parentNode.parentNode; 
-      var grandpaId = grandpa.id; 
+      var grandpa = event.target.parentNode.parentNode;
+      var grandpaId = grandpa.id;
       var movieId = grandpaId.replace("movie_", ""); // 3
       movies.deleteMovie(movieId).then(function () {
         removeExistentMovies();
@@ -336,6 +334,14 @@ function displayButtons() {
   document.getElementById('registerBtn').style.display = 'none';
   document.getElementById('logoutBtn').style.display = 'block';
   document.getElementById('add-movie-button').style.display = 'block';
+
+  Array.from(document.getElementsByClassName('movie-edit')).forEach(function (btn) {
+    btn.style.display = 'block';
+  });
+
+  Array.from(document.getElementsByClassName('movie-delete')).forEach(function (btn) {
+    btn.style.display = 'block';
+  });
 }
 
 function hideButtonsAfterLogout() {
@@ -344,6 +350,14 @@ function hideButtonsAfterLogout() {
   document.getElementById('registerBtn').style.display = 'block';
   document.getElementById('logoutBtn').style.display = 'none';
   document.getElementById('add-movie-button').style.display = 'none';
+ 
+  Array.from(document.getElementsByClassName('movie-edit')).forEach(function (btn) {
+    btn.style.display = 'none';
+  });
+
+  Array.from(document.getElementsByClassName('movie-delete')).forEach(function (btn) {
+    btn.style.display = 'none';
+  });
 }
 
 function hideAlert(alertId) {
