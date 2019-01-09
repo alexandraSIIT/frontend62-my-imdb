@@ -208,7 +208,31 @@
             </div>
         </form>
     </dialog>
-    </form>
+    <!-- </form> -->
+    <dialog id="movie-details-dialog">
+        <div class="details-dialog-header">
+            <span class="details-dialog-close">&times;</span>
+            <h3 class="title"></h3>
+        </div>
+        <p class="poster"></p>
+        <p class="type"></p>
+        <p class="genre"></p>
+        <p class="runtime"></p>
+        <p class="year"></p>
+        <p class="rated"></p>
+        <p class="rating"></p>
+        <p class="metascore"></p>
+        <p class="language"></p>
+        <p class="country"></p>
+        <p class="production"></p>
+        <p class="director"></p>
+        <p class="writer"></p>
+        <p class="actors"></p>
+        <p class="plot"></p>
+        <p class="awards"></p>
+        <p class="dvd"></p>
+        <p class="box-office"></p>
+    </dialog>
 
     <div id="movies"></div>
     <div id="template" class="template container-fluid">
@@ -220,21 +244,109 @@
         <!-- <p class="genre"></p> -->
         <!-- <p class="year"></p> -->
         <div>
-                <button class="movie-delete">Delete</button>
-                <button class="movie-edit">Edit</button>
-            </div>
-    </div>
-    <!-- </article> -->
-    <div id='pagination'></div>
+            <button class="movie-delete">Delete</button>
+            <button class="movie-edit">Edit</button>
+            <dialog id="edit-movie-dialog">
+                <div class="edit-dialog-header">
+                    <span class="modal-close">&times;</span>
+                    <h2>Edit Movie Details</h2>
+                </div>
+                <form class="edit-movie-form">
 
-    <!-- </main> -->
-    <!-- <footer>Created at 01/01/2019 by CodeForFood 62 Frontend Team</footer> -->
+                    <label for='title'>Title</label>
+                    <input class="editTitle">
+                    <br>
 
-    <script src="../models/Auth.js"></script>
-    <script src="../views/home.js"></script>
-    <script src="../views/register.js"></script>
-    <script src="../views/login.js"></script>
-    <script src="../views/logout.js"></script>
+                    <label for='year'>Year</label>
+                    <input class="editYear">
+                    <br>
+
+                    <label for='rated'>Rated</label>
+                    <input class="editRated">
+                    <br>
+
+                    <label for='runtime'>Runtime</label>
+                    <input class="editRuntime">
+                    <br>
+
+                    <label for='genre'>Genre</label>
+                    <input class="editGenre">
+                    <br>
+
+                    <label for='director'>Director</label>
+                    <input class="editDirector">
+                    <br>
+
+
+                    <label for='writer'>Writer</label>
+                    <input class="editWriter">
+                    <br>
+
+                    <label for='actors'>Actors</label>
+                    <input class="editActors">
+                    <br>
+
+                    <label for='plot'>Plot</label>
+                    <input class="editPlot">
+                    <br>
+
+                    <label for='language'>Language</label>
+                    <input class="editLanguage">
+                    <br>
+
+                    <label for='country'>Country</label>
+                    <input class="editCountry">
+                    <br>
+
+                    <label for='awards'>Awards</label>
+                    <input class="editAwards">
+                    <br>
+
+                    <label for='poster'>Poster</label>
+                    <input class="editPoster">
+                    <br>
+
+                    <label for='metascore'>Metascore</label>
+                    <input class="editMetascore">
+                    <br>
+
+                    <label for='rating'>IMDB Rating</label>
+                    <input class="editRating">
+                    <br>
+
+                    <label for='type'>Type</label>
+                    <input class="editType">
+                    <br>
+
+                    <label for='dvd'>DVD</label>
+                    <input class="editDvd">
+                    <br>
+
+                    <label for='box-office'>Box office</label>
+                    <input class="editBoxoffice">
+                    <br>
+
+                    <label for='production'>Production</label>
+                    <input class="editProduction">
+                    <br>
+
+                    <button class="submit-updates">Save</button>
+                </form>
+            </dialog>
+        </div>
+        <!-- </article> -->
+        <div id='pagination'></div>
+
+        <!-- </main> -->
+        <!-- <footer>Created at 01/01/2019 by CodeForFood 62 Frontend Team</footer> -->
+
+        <script src="../views/movieDetails.js"></script>
+        <script src="../models/Auth.js"></script>
+        <script src="../views/home.js"></script>
+        <script src="../views/register.js"></script>
+        <script src="../views/login.js"></script>
+        <script src="../views/logout.js"></script>
+
 </body>
 
 </html>

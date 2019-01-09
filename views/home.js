@@ -29,7 +29,7 @@ function displayMovies(response) {
     movieTitleElement.addEventListener("click", function (event) {
 
       getMovieDetails(event.target, movie);
-      location.href = "/pages/movieDetails.html?id=" + movie.id;
+      // location.href = "/pages/movieDetails.html?id=" + movie.id;
     })
     var imageUrl = movieClone.querySelector(".myImage");
     if (response[i].poster == 'N/A' || response[i].poster == '') {
@@ -50,8 +50,8 @@ function displayMovies(response) {
       console.log("event", event);
       // // event.target = the button that we clicked
       // // the clicked button has a div as parent, and that has the article as parent
-      var grandpa = event.target.parentNode.parentNode; 
-      var grandpaId = grandpa.id; 
+      var grandpa = event.target.parentNode.parentNode;
+      var grandpaId = grandpa.id;
       var movieId = grandpaId.replace("movie_", ""); // 3
       movies.deleteMovie(movieId).then(function () {
         removeExistentMovies();
@@ -61,8 +61,8 @@ function displayMovies(response) {
       });
     });
 
-    //   var editButton = gameClone.querySelector(".game-edit");
-    //   editButton.addEventListener("click", updateGameOnClick);
+    var editButton = movieClone.querySelector(".movie-edit");
+    editButton.addEventListener("click", editMovie);
 
     moviesContainer.appendChild(movieClone);
   }
@@ -259,17 +259,161 @@ function addMovie() {
   }
 }
 
+function editMovie(event) {
+  var editDialog = document.getElementById("edit-movie-dialog")
+  var source = event.target.parentNode.parentNode
+  var sourceId = source.id
+  var movieId = sourceId.replace("movie_", "");
+  //  console.log("ad", source)
+  var movie = new Movie();
+
+  movie.getMovieDetails(movieId).then(function (response) {
+    var inputTitle = document.querySelector(".editTitle");
+    inputTitle.value = response.title;
+
+    var inputYear = document.querySelector(".editYear");
+    inputYear.value = response.year;
+
+    var inputRated = document.querySelector(".editRated");
+    inputRated.value = response.rated;
+
+    var inputRuntime = document.querySelector(".editRuntime");
+    inputRuntime.value = response.runtime;
+
+    var inputGenre = document.querySelector(".editGenre");
+    inputGenre.value = response.genre;
+
+    var inputDirector = document.querySelector(".editDirector");
+    inputDirector.value = response.director;
+
+    var inputWriter = document.querySelector(".editWriter");
+    inputWriter.value = response.writer;
+
+    var inputActors = document.querySelector(".editActors");
+    inputActors.value = response.actors;
+
+    var inputPlot = document.querySelector(".editPlot");
+    inputPlot.value = response.plot;
+
+    var inputLanguage = document.querySelector(".editLanguage");
+    inputLanguage.value = response.language;
+
+    var inputCountry = document.querySelector(".editCountry");
+    inputCountry.value = response.country;
+
+    var inputAwards = document.querySelector(".editAwards");
+    inputAwards.value = response.awards;
+
+    var inputPoster = document.querySelector(".editPoster");
+    inputPoster.value = response.poster;
+
+    var inputMetascore = document.querySelector(".editMetascore");
+    inputMetascore.value = response.metascore;
+
+    var inputRating = document.querySelector(".editRating");
+    inputRating.value = response.rating;
+
+    var inputType = document.querySelector(".editType");
+    inputType.value = response.type;
+
+    var inputDvd = document.querySelector(".editDvd");
+    inputDvd.value = response.dvd;
+
+    var inputBoxOffice = document.querySelector(".editBoxoffice");
+    inputBoxOffice.value = response.boxOffice;
+
+    var inputProduction = document.querySelector(".editProduction");
+    inputProduction.value = response.production;
+
+    editDialog.showModal();
+    
+  })
+
+
+  var updateButton = document.querySelector(".submit-updates")
+  updateButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    var inputTitle = document.querySelector(".editTitle");
+    console.log ('Title:', inputTitle.value)
+    var inputYear = document.querySelector(".editYear");
+    var inputRated = document.querySelector(".editRated");
+    var inputRuntime = document.querySelector(".editRuntime");
+    var inputGenre = document.querySelector(".editGenre");
+    var inputDirector = document.querySelector(".editDirector");
+    var inputWriter = document.querySelector(".editWriter");
+    var inputActors = document.querySelector(".editActors");
+    var inputPlot = document.querySelector(".editPlot");
+    var inputLanguage = document.querySelector(".editLanguage");
+    var inputCountry = document.querySelector(".editCountry");
+    var inputAwards = document.querySelector(".editAwards");
+    var inputPoster = document.querySelector(".editPoster");
+    var inputMetascore = document.querySelector(".editMetascore");
+    var inputRating = document.querySelector(".editRating");
+    var inputType = document.querySelector(".editType");
+    var inputDvd = document.querySelector(".editDvd");
+    var inputBoxOffice = document.querySelector(".editBoxoffice");
+    var inputProduction = document.querySelector(".editProduction");
+  
+    var movie = new Movie({
+      _id: movieId,
+      Title: inputTitle.value,
+      Year: inputYear.value,
+      Rated: inputRated.value,
+      Runtime: inputRuntime.value,
+      Genre: inputGenre.value,
+      Director: inputDirector.value,
+      Writer: inputWriter.value,
+      Actors: inputActors.value,
+      Plot: inputPlot.value,
+      Language: inputLanguage.value,
+      Country: inputCountry.value,
+      Awards: inputAwards.value,
+      Poster: inputPoster.value,
+      Metascore: inputMetascore.value,
+      Rating: inputRating.value,
+      Type: inputType.value,
+      DVD: inputDvd.value,
+      boxOffice: inputBoxOffice.value,
+      production: inputProduction.value
+    });
+    movie.updateMovieDetails()
+  })
+  var closeButton = document.querySelector(".modal-close");
+  closeButton.onclick = function () {
+    editDialog.close();
+    document.querySelector(".edit-movie-form").reset()
+  }
+
+  window.onclick = function (event) {
+    if (event.target == editDialog) {
+      editDialog.close();
+    }
+  }
+}
+
 function getMovieDetails(clickedButton, movieObject) {
   console.log(clickedButton);
   var grandpa = clickedButton.parentNode.parentNode;
   var grandpaId = grandpa.id;
   var movieId = grandpaId.replace("movie_", "");
   console.log(movieId)
+  var detailsDialog = document.getElementById("movie-details-dialog")
+  var detailsDialogClone = detailsDialog.cloneNode(true);
+  detailsDialogClone.id = movieId;
+  detailsDialogClone.className ='movie-details';
+  document.body.appendChild(detailsDialogClone);
+  detailsDialogClone.showModal();
+  var closeButton = detailsDialogClone.querySelector(".details-dialog-close");
+  closeButton.onclick = function () {
+    detailsDialogClone.close()
+    detailsDialogClone.remove()
+
+  }
 
 
   movieObject.getMovieDetails(movieId).then(
     function (response) {
-      // displayGamesDetails(response);
+      displayMovieDetails(response, detailsDialogClone);
       console.log(response)
     },
     function (error) {
