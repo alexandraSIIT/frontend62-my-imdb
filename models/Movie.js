@@ -1,4 +1,4 @@
-var accesToken = localStorage.getItem('AccesToken');
+var accesToken = sessionStorage.getItem('AccesToken');
 
 function Movie(options = {}) {
   this.id = options._id;

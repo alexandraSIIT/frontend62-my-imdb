@@ -19,22 +19,31 @@
 <body>
     <div class="alert alert-success fade in" id='success-alert-register' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> User successfully created!
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> User successfully created!
     </div>
     <div class="alert alert-success fade in" id='success-alert-login' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> User successfully logged in!
+        <strong><i class='fa fa-check' style="font-size:20px"></i>
+        </strong> User successfully logged in!
     </div>
     <div class="alert alert-success fade in" id='success-alert-logout' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> User successfully logged out!
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> User successfully logged out!
     </div>
     <div class="alert alert-success fade in" id='succes-alert-add-movie' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> Movie successfully added!
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> Movie successfully added!
     </div>
-    <nav class="navbar navbar-default navbar-expand-lg navbar-light">
-        <div class="collapse navbar-collapse justify-content-start">
+    <div class="alert alert-success fade in" id='succes-alert-delete-movie' style='display:none'>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> Movie successfully deleted!
+    </div>
+    <div class="alert alert-success fade in" id='succes-alert-edit-movie' style='display:none'>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> Movie successfully edited!
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="justify-content-start">
             <ul class="nav navbar-nav navbar-right ml-auto">
                 <li class='nav-item' id='logged-in'>
                 </li>
@@ -55,7 +64,7 @@
     </nav>
     <div class="search-header">
         <div class="inline search-box">
-            <h4>Search movies</h4>
+            <h4>Find your favorite movie!</h4>
             <select id="search-category">
                 <!-- <option value="all">All</option>  -->
                 <option value="Title">Title</option>
@@ -65,11 +74,11 @@
                 <option value="Type">Type</option>
             </select>
             <input id='movie-search' type="text" placeholder="Type a search parameter here..">
-            <button id="search-button" class="fa fa-search"></button>
+            <button id="search-button" class="btn fa fa-search"></button>
         </div>
     </div>
 
-    <button id="add-movie-button" style='display:none;'>Add new movie</button>
+    <button id="add-movie-button" class='btn fa fa-plus' style='display:none;' data-toggle="tooltip" title="Add new movie"></button>
     <dialog id="add-dialog">
         <form class='container-fluid' id='add-movie-form'>
             <div class='form-group'>
@@ -141,7 +150,6 @@
     </dialog>
 
     <!-- LOGIN PART -->
-
     <dialog id='login-dialog'>
         <form name="form" id='login-form'>
             <!-- USERNAME -->
@@ -233,112 +241,128 @@
         <p class="dvd"></p>
         <p class="box-office"></p>
     </dialog>
+    
+    <div>
+        <button class="movie-delete">Delete</button>
+        <button class="movie-edit">Edit</button>
+        <dialog id="edit-movie-dialog">
+            <div class="edit-dialog-header">
+                <span class="modal-close">&times;</span>
+                <h2>Edit Movie Details</h2>
+            </div>
+            <form class="edit-movie-form">
 
-    <div id="movies"></div>
-    <div id="template" class="template container-fluid">
-        <img class="myImage row">
-        <div class="inline row" style="width:100%">
-            <div class="movie-title" style='cursor:pointer;'></div>
-            <div class="rating"></div>
+                <label for='title'>Title</label>
+                <input class="editTitle">
+                <br>
+
+                <label for='year'>Year</label>
+                <input class="editYear">
+                <br>
+
+                <label for='rated'>Rated</label>
+                <input class="editRated">
+                <br>
+
+                <label for='runtime'>Runtime</label>
+                <input class="editRuntime">
+                <br>
+
+                <label for='genre'>Genre</label>
+                <input class="editGenre">
+                <br>
+
+                <label for='director'>Director</label>
+                <input class="editDirector">
+                <br>
+
+
+                <label for='writer'>Writer</label>
+                <input class="editWriter">
+                <br>
+
+                <label for='actors'>Actors</label>
+                <input class="editActors">
+                <br>
+
+                <label for='plot'>Plot</label>
+                <input class="editPlot">
+                <br>
+
+                <label for='language'>Language</label>
+                <input class="editLanguage">
+                <br>
+
+                <label for='country'>Country</label>
+                <input class="editCountry">
+                <br>
+
+                <label for='awards'>Awards</label>
+                <input class="editAwards">
+                <br>
+
+                <label for='poster'>Poster</label>
+                <input class="editPoster">
+                <br>
+
+                <label for='metascore'>Metascore</label>
+                <input class="editMetascore">
+                <br>
+
+                <label for='rating'>IMDB Rating</label>
+                <input class="editRating">
+                <br>
+
+                <label for='type'>Type</label>
+                <input class="editType">
+                <br>
+
+                <label for='dvd'>DVD</label>
+                <input class="editDvd">
+                <br>
+
+                <label for='box-office'>Box office</label>
+                <input class="editBoxoffice">
+                <br>
+
+                <label for='production'>Production</label>
+                <input class="editProduction">
+                <br>
+
+                <button class="submit-updates">Save</button>
+            </form>
+        </dialog>
+    </div>
+
+    <!----COFIRM DELETE MOVIE -->
+    <dialog id='confirm-dialog'>
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel"><span class="fa fa-question-circle" style="font-size:24px"></span>
+                Confirm delete</h4>
         </div>
-        <!-- <p class="genre"></p> -->
-        <!-- <p class="year"></p> -->
-        <div>
-            <button class="movie-delete">Delete</button>
-            <button class="movie-edit">Edit</button>
-            <dialog id="edit-movie-dialog">
-                <div class="edit-dialog-header">
-                    <span class="modal-close">&times;</span>
-                    <h2>Edit Movie Details</h2>
-                </div>
-                <form class="edit-movie-form">
-
-                    <label for='title'>Title</label>
-                    <input class="editTitle">
-                    <br>
-
-                    <label for='year'>Year</label>
-                    <input class="editYear">
-                    <br>
-
-                    <label for='rated'>Rated</label>
-                    <input class="editRated">
-                    <br>
-
-                    <label for='runtime'>Runtime</label>
-                    <input class="editRuntime">
-                    <br>
-
-                    <label for='genre'>Genre</label>
-                    <input class="editGenre">
-                    <br>
-
-                    <label for='director'>Director</label>
-                    <input class="editDirector">
-                    <br>
-
-
-                    <label for='writer'>Writer</label>
-                    <input class="editWriter">
-                    <br>
-
-                    <label for='actors'>Actors</label>
-                    <input class="editActors">
-                    <br>
-
-                    <label for='plot'>Plot</label>
-                    <input class="editPlot">
-                    <br>
-
-                    <label for='language'>Language</label>
-                    <input class="editLanguage">
-                    <br>
-
-                    <label for='country'>Country</label>
-                    <input class="editCountry">
-                    <br>
-
-                    <label for='awards'>Awards</label>
-                    <input class="editAwards">
-                    <br>
-
-                    <label for='poster'>Poster</label>
-                    <input class="editPoster">
-                    <br>
-
-                    <label for='metascore'>Metascore</label>
-                    <input class="editMetascore">
-                    <br>
-
-                    <label for='rating'>IMDB Rating</label>
-                    <input class="editRating">
-                    <br>
-
-                    <label for='type'>Type</label>
-                    <input class="editType">
-                    <br>
-
-                    <label for='dvd'>DVD</label>
-                    <input class="editDvd">
-                    <br>
-
-                    <label for='box-office'>Box office</label>
-                    <input class="editBoxoffice">
-                    <br>
-
-                    <label for='production'>Production</label>
-                    <input class="editProduction">
-                    <br>
-
-                    <button class="submit-updates">Save</button>
-                </form>
-            </dialog>
+        <p> Are you sure you want to delete this movie?</p>
+        <div class='input-group' style='float:right'>
+            <button id="cancel-confirm-dialog" class='btn'>Cancel</button>
+            <button type="submit" class="btn btn-primary" id='confirmDelete'>Delete</button>
         </div>
-        <!-- </article> -->
-        <div id='pagination'></div>
+    </dialog>
 
-        <!-- </main> -->
-        <!-- <footer>Created at 01/01/2019 by CodeForFood 62 Frontend Team</footer> -->
+    <div id="movies" class="row">
+        <div id="template" class="template container-fluid col-sm-6 col-md-4 col-lg-3">
+            <img class="myImage">
+            <div class="inline" style="width:100%">
+                <div class="movie-title" style='cursor:pointer;'></div>
+                <div class="rating"></div>
+            </div>
+            <!-- <p class="genre"></p> -->
+            <!-- <p class="year"></p> -->
+            <div>
+                <button class="movie-delete  btn fa fa-pencil" style='display:none;' data-toggle="tooltip" title="Delete"></button>
+                <button class="movie-edit btn fa fa-trash-o" style='display:none;' data-toggle="tooltip" title="Edit"></button>
+            </div>
+        </div>
+    </div>
+    <div id='pagination'></div>
 
         <script src="../views/movieDetails.js"></script>
         <script src="../models/Auth.js"></script>

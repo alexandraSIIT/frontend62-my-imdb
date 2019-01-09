@@ -17,9 +17,8 @@
 
 #movie-search, #search-category {
     border: none;
-    border-radius: 3px 0 0 3px;
+    border-radius: 3px;
     box-shadow: 1px 1px 1px rgba(0,0,0,0.4) inset;
-    font: 14px Verdana, Arial, sans-serif;
     padding: 5px 8px;
     vertical-align: middle;
 }
@@ -50,11 +49,11 @@
 }
 
 .template {
-    width: 30%;
+    width: 50%;
 }
 
 .myImage {
-    width: 150%;
+    width: 100%;
 }
 
 .anchor-page-nb {
@@ -66,7 +65,7 @@
     cursor: pointer;
 }
 
-a.active {
+.active {
     background-color: dodgerblue;
     color: white;
   }
@@ -92,17 +91,37 @@ a.active {
     color: red;
 }
 
-  .submit-updates {
+.submit-updates {
     float: right;
-  }
+}
 
-  .movie-details {
+.movie-details {
     border: black solid 2px;
     width: 80%;
-  }
+}
 
 .poster {
     display: flex;
     justify-content: center;
 }
 
+.modal-header {
+    background-color: #337AB7;
+    padding:16px;
+    color:#FFF;
+    border-bottom:2px dashed #337AB7;
+}
+
+#confirm-dialog {
+    width: 30%;
+    height: 45%;
+}
+
+#confirm-dialog p {
+    margin: 20px;
+}
+
+.navbar {
+    margin-bottom: 0 !important;
+    border: none !important;
+}

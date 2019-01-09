@@ -11,10 +11,8 @@ function getMovies() {
 var template = document.getElementById("template");
 function displayMovies(response) {
   var moviesContainer = document.getElementById("movies");
-  // traverse the array (parcurgerea sirului)
   for (var i = 0; i < response.length; i++) {
 
-    // clone the template; copy template's children as well (deep parameter = true)
     var movieClone = template.cloneNode(true);
     // set a unique id for each article
 
@@ -29,7 +27,8 @@ function displayMovies(response) {
     movieTitleElement.addEventListener("click", function (event) {
 
       getMovieDetails(event.target, movie);
-      // location.href = "/pages/movieDetails.html?id=" + movie.id;
+      // window.open("/pages/movieDetails.html?id=" + movie.id,
+      //   '_blank');
     })
     var imageUrl = movieClone.querySelector(".myImage");
     if (response[i].poster == 'N/A' || response[i].poster == '') {
@@ -44,8 +43,8 @@ function displayMovies(response) {
     // var movieYearElement = movieClone.querySelector(".year");
     // movieYearElement.innerHTML = response[i].year;
 
-
     var deleteButton = movieClone.querySelector(".movie-delete");
+    var confirmDialog = document.getElementById('confirm-dialog');
     deleteButton.addEventListener("click", function (event) {
       console.log("event", event);
       // // event.target = the button that we clicked
@@ -59,7 +58,31 @@ function displayMovies(response) {
           displayMovies(movies.items);
         });
       });
-    });
+      var grandpa = event.target.parentNode.parentNode;
+      var grandpaId = grandpa.id;
+      var movieId = grandpaId.replace("movie_", "");
+      confirmDialog.showModal();
+      if (confirmDialog.open) {
+        var cancelConfirmDialogBtn = document.getElementById('cancel-confirm-dialog');
+        cancelConfirmDialogBtn.addEventListener('click', function (event) {
+          event.preventDefault();
+          confirmDialog.close();
+        })
+        var confirmDelete = document.getElementById("confirmDelete");
+        confirmDelete.addEventListener("click", function (event) {
+          event.preventDefault();
+          movies.deleteMovie(movieId).then(function () {
+            confirmDialog.close();
+            removeExistentMovies();
+            document.getElementById('succes-alert-delete-movie').style.display = 'block';
+            hideAlert('succes-alert-delete-movie');
+            movies.getMovies(10, 0).then(function () {
+              displayMovies(movies.items);
+            });
+          });
+        })
+      }
+    })
 
     var editButton = movieClone.querySelector(".movie-edit");
     editButton.addEventListener("click", editMovie);
@@ -103,7 +126,6 @@ function removeExistentMovies() {
     movieDiv[0].parentNode.removeChild(movieDiv[0]);
   }
   var anchorPageNb = document.getElementsByClassName('anchor-page-nb');
-  console.log(anchorPageNb)
   while (anchorPageNb[0]) {
     anchorPageNb[0].parentNode.removeChild(anchorPageNb[0]);
   }
@@ -127,11 +149,13 @@ function addPagination(category, searchValue) {
   let anchor;
   var firstPageBtn = document.createElement('a');
   firstPageBtn.innerHTML = '&laquo';
-  firstPageBtn.className = 'anchor-page-nb';
+  firstPageBtn.className = 'anchor-page-nb firstPage';
   firstPageBtn.addEventListener('click', function () {
     removeExistentMovies();
     movies.getMovies(10, 0, category, searchValue).then(function () {
       displayMovies(movies.items);
+      var firstBtn = document.getElementsByClassName('firstPage')[0];
+      firstBtn.className += ' active';
     });
   });
   pagination.appendChild(firstPageBtn);
@@ -143,23 +167,30 @@ function addPagination(category, searchValue) {
     pagination.appendChild(anchor);
   }
 
-  Array.from(document.getElementsByClassName('anchor-page-nb')).forEach(function (anchor, index) {
-    anchor.addEventListener('click', function () {
+  Array.from(document.querySelectorAll('.anchor-page-nb:not(.firstPage)')).forEach(function (anchor, index) {
+    anchor.addEventListener('click', function (event) {
       removeExistentMovies();
-      movies.getMovies(10, (index - 1) * 10, category, searchValue).then(function () {
+      movies.getMovies(10, (index) * 10, category, searchValue).then(function () {
         displayMovies(movies.items);
+        var anchors = document.getElementsByClassName('anchor-page-nb');
+        for (var i = 0; i < anchors.length; i++) {
+          if (anchors[i].innerHTML === (index + 1).toString()) {
+            anchors[i].className += ' active';
+          }
+        }
       });
-      anchor.className = 'active';
     });
   });
 
   var lastPageBtn = document.createElement('a');
   lastPageBtn.innerHTML = '&raquo;';
-  lastPageBtn.className = 'anchor-page-nb';
+  lastPageBtn.className = 'anchor-page-nb lastPage';
   lastPageBtn.addEventListener('click', function () {
     removeExistentMovies();
     movies.getMovies(10, (movies.numberOfPages - 1) * 10, category, searchValue).then(function () {
       displayMovies(movies.items);
+      var lastBtn = document.getElementsByClassName('lastPage')[0];
+      lastBtn.className += ' active';
     });
   });
   pagination.appendChild(lastPageBtn);
@@ -326,7 +357,7 @@ function editMovie(event) {
     inputProduction.value = response.production;
 
     editDialog.showModal();
-    
+
   })
 
 
@@ -334,7 +365,7 @@ function editMovie(event) {
   updateButton.addEventListener('click', function (event) {
     event.preventDefault();
     var inputTitle = document.querySelector(".editTitle");
-    console.log ('Title:', inputTitle.value)
+    console.log('Title:', inputTitle.value)
     var inputYear = document.querySelector(".editYear");
     var inputRated = document.querySelector(".editRated");
     var inputRuntime = document.querySelector(".editRuntime");
@@ -353,7 +384,7 @@ function editMovie(event) {
     var inputDvd = document.querySelector(".editDvd");
     var inputBoxOffice = document.querySelector(".editBoxoffice");
     var inputProduction = document.querySelector(".editProduction");
-  
+
     var movie = new Movie({
       _id: movieId,
       Title: inputTitle.value,
@@ -400,7 +431,7 @@ function getMovieDetails(clickedButton, movieObject) {
   var detailsDialog = document.getElementById("movie-details-dialog")
   var detailsDialogClone = detailsDialog.cloneNode(true);
   detailsDialogClone.id = movieId;
-  detailsDialogClone.className ='movie-details';
+  detailsDialogClone.className = 'movie-details';
   document.body.appendChild(detailsDialogClone);
   detailsDialogClone.showModal();
   var closeButton = detailsDialogClone.querySelector(".details-dialog-close");
@@ -466,20 +497,21 @@ registerBtn.addEventListener('click', function () {
   }
 })
 
-displayButtonsAfterLogin();
-function displayButtonsAfterLogin() {
-  if (accesToken) {
-    displayButtons();
-  }
-}
-
-function displayButtons() {
+function displayButtons(username) {
   document.getElementById('logged-in').style.display = 'block';
-  document.getElementById('logged-in').innerHTML = `<p>You are logged in as<strong>admin!</strong></p>`;
+  document.getElementById('logged-in').innerHTML = `<p>You are logged in as<strong>${username}!</strong></p>`;
   document.getElementById('loginBtn').style.display = 'none';
   document.getElementById('registerBtn').style.display = 'none';
   document.getElementById('logoutBtn').style.display = 'block';
   document.getElementById('add-movie-button').style.display = 'block';
+
+  Array.from(document.getElementsByClassName('movie-edit')).forEach(function (btn) {
+    btn.style.display = 'block';
+  });
+
+  Array.from(document.getElementsByClassName('movie-delete')).forEach(function (btn) {
+    btn.style.display = 'block';
+  });
 }
 
 function hideButtonsAfterLogout() {
@@ -488,6 +520,14 @@ function hideButtonsAfterLogout() {
   document.getElementById('registerBtn').style.display = 'block';
   document.getElementById('logoutBtn').style.display = 'none';
   document.getElementById('add-movie-button').style.display = 'none';
+
+  Array.from(document.getElementsByClassName('movie-edit')).forEach(function (btn) {
+    btn.style.display = 'none';
+  });
+
+  Array.from(document.getElementsByClassName('movie-delete')).forEach(function (btn) {
+    btn.style.display = 'none';
+  });
 }
 
 function hideAlert(alertId) {
