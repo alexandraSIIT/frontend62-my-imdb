@@ -1,6 +1,6 @@
 $(function() {
     $("#logoutBtn").click(function() {
-        var token = localStorage.getItem("AccesToken");
+        var token = sessionStorage.getItem("AccesToken");
         Logout(token);
         return false;
     })

@@ -17,9 +17,8 @@
 
 #movie-search, #search-category {
     border: none;
-    border-radius: 3px 0 0 3px;
+    border-radius: 3px;
     box-shadow: 1px 1px 1px rgba(0,0,0,0.4) inset;
-    font: 14px Verdana, Arial, sans-serif;
     padding: 5px 8px;
     vertical-align: middle;
 }
@@ -164,4 +163,9 @@ a.active {
 
 #confirm-dialog p {
     margin: 20px;
+}
+
+.navbar {
+    margin-bottom: 0 !important;
+    border: none !important;
 }

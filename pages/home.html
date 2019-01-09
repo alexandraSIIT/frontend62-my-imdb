@@ -19,26 +19,31 @@
 <body>
     <div class="alert alert-success fade in" id='success-alert-register' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> User successfully created!
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> User successfully created!
     </div>
     <div class="alert alert-success fade in" id='success-alert-login' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> User successfully logged in!
+        <strong><i class='fa fa-check' style="font-size:20px"></i>
+        </strong> User successfully logged in!
     </div>
     <div class="alert alert-success fade in" id='success-alert-logout' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> User successfully logged out!
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> User successfully logged out!
     </div>
     <div class="alert alert-success fade in" id='succes-alert-add-movie' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> Movie successfully added!
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> Movie successfully added!
     </div>
     <div class="alert alert-success fade in" id='succes-alert-delete-movie' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> Movie successfully deleted!
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> Movie successfully deleted!
     </div>
-    <nav class="navbar navbar-default navbar-expand-lg navbar-light">
-        <div class="collapse navbar-collapse justify-content-start">
+    <div class="alert alert-success fade in" id='succes-alert-edit-movie' style='display:none'>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> Movie successfully edited!
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="justify-content-start">
             <ul class="nav navbar-nav navbar-right ml-auto">
                 <li class='nav-item' id='logged-in'>
                 </li>
@@ -59,7 +64,7 @@
     </nav>
     <div class="search-header">
         <div class="inline search-box">
-            <h4>Search movies</h4>
+            <h4>Find your favorite movie!</h4>
             <select id="search-category">
                 <!-- <option value="all">All</option>  -->
                 <option value="Title">Title</option>
@@ -69,11 +74,11 @@
                 <option value="Type">Type</option>
             </select>
             <input id='movie-search' type="text" placeholder="Type a search parameter here..">
-            <button id="search-button" class="fa fa-search"></button>
+            <button id="search-button" class="btn fa fa-search"></button>
         </div>
     </div>
 
-    <button id="add-movie-button" style='display:none;'>Add new movie</button>
+    <button id="add-movie-button" class='btn fa fa-plus' style='display:none;' data-toggle="tooltip" title="Add new movie"></button>
     <dialog id="add-dialog">
         <form class='container-fluid' id='add-movie-form'>
             <div class='form-group'>
@@ -216,7 +221,8 @@
     <!----COFIRM DELETE MOVIE -->
     <dialog id='confirm-dialog'>
         <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel"><span class="fa fa-question" style="font-size:24px"></span> Confirm delete</h4>
+            <h4 class="modal-title" id="myModalLabel"><span class="fa fa-question-circle" style="font-size:24px"></span>
+                Confirm delete</h4>
         </div>
         <p> Are you sure you want to delete this movie?</p>
         <div class='input-group' style='float:right'>
@@ -235,8 +241,8 @@
         <!-- <p class="genre"></p> -->
         <!-- <p class="year"></p> -->
         <div>
-            <button class="movie-delete" style='display:none;'>Delete</button>
-            <button class="movie-edit" style='display:none;'>Edit</button>
+            <button class="movie-delete btn fa fa-pencil" style='display:none;' data-toggle="tooltip" title="Delete"></button>
+            <button class="movie-edit btn fa fa-trash-o" style='display:none;' data-toggle="tooltip" title="Edit"></button>
         </div>
     </div>
     <div id='pagination'></div>
