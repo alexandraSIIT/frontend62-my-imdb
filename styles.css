@@ -49,11 +49,11 @@
 }
 
 .template {
-    width: 30%;
+    width: 50%;
 }
 
 .myImage {
-    width: 150%;
+    width: 100%;
 }
 
 .anchor-page-nb {
@@ -65,7 +65,7 @@
     cursor: pointer;
 }
 
-a.active {
+.active {
     background-color: dodgerblue;
     color: white;
   }
@@ -90,6 +90,8 @@ a.active {
 .error {
     color: red;
 }
+
+
 
 /* Style for the movie details edit form */
 .modal {

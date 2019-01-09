@@ -28,7 +28,7 @@ function displayMovies(response) {
 
       getMovieDetails(event.target, movie);
       window.open("/pages/movieDetails.html?id=" + movie.id,
-      '_blank');
+        '_blank');
     })
     var imageUrl = movieClone.querySelector(".myImage");
     if (response[i].poster == 'N/A' || response[i].poster == '') {
@@ -114,7 +114,6 @@ function removeExistentMovies() {
     movieDiv[0].parentNode.removeChild(movieDiv[0]);
   }
   var anchorPageNb = document.getElementsByClassName('anchor-page-nb');
-  console.log(anchorPageNb)
   while (anchorPageNb[0]) {
     anchorPageNb[0].parentNode.removeChild(anchorPageNb[0]);
   }
@@ -138,11 +137,13 @@ function addPagination(category, searchValue) {
   let anchor;
   var firstPageBtn = document.createElement('a');
   firstPageBtn.innerHTML = '&laquo';
-  firstPageBtn.className = 'anchor-page-nb';
+  firstPageBtn.className = 'anchor-page-nb firstPage';
   firstPageBtn.addEventListener('click', function () {
     removeExistentMovies();
     movies.getMovies(10, 0, category, searchValue).then(function () {
       displayMovies(movies.items);
+      var firstBtn = document.getElementsByClassName('firstPage')[0];
+      firstBtn.className += ' active';
     });
   });
   pagination.appendChild(firstPageBtn);
@@ -154,23 +155,30 @@ function addPagination(category, searchValue) {
     pagination.appendChild(anchor);
   }
 
-  Array.from(document.getElementsByClassName('anchor-page-nb')).forEach(function (anchor, index) {
-    anchor.addEventListener('click', function () {
+  Array.from(document.querySelectorAll('.anchor-page-nb:not(.firstPage)')).forEach(function (anchor, index) {
+    anchor.addEventListener('click', function (event) {
       removeExistentMovies();
-      movies.getMovies(10, (index - 1) * 10, category, searchValue).then(function () {
+      movies.getMovies(10, (index) * 10, category, searchValue).then(function () {
         displayMovies(movies.items);
+        var anchors = document.getElementsByClassName('anchor-page-nb');
+        for (var i = 0; i < anchors.length; i++) {
+          if (anchors[i].innerHTML === (index + 1).toString()) {
+            anchors[i].className += ' active';
+          }
+        }
       });
-      anchor.className = 'active';
     });
   });
 
   var lastPageBtn = document.createElement('a');
   lastPageBtn.innerHTML = '&raquo;';
-  lastPageBtn.className = 'anchor-page-nb';
+  lastPageBtn.className = 'anchor-page-nb lastPage';
   lastPageBtn.addEventListener('click', function () {
     removeExistentMovies();
     movies.getMovies(10, (movies.numberOfPages - 1) * 10, category, searchValue).then(function () {
       displayMovies(movies.items);
+      var lastBtn = document.getElementsByClassName('lastPage')[0];
+      lastBtn.className += ' active';
     });
   });
   pagination.appendChild(lastPageBtn);
