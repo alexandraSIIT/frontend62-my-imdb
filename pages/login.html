@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IMDB Movies</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <meta charset="UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src="../models/Movie.js"></script>
+    <script src="../models/Movies.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <dialog id='login-dialog' class='container'>
+        <div class="card card-container">
+            <button type="button" class="close" id='cancel-login-dialog' data-dismiss="modal" aria-label="Close">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png">
+            <p id="profile-name" class="profile-name-card"></p>
+            <form name="form" id='login-form' class='form-signin'>
+                <!-- USERNAME -->
+                <!-- <div class='form-group'> -->
+                <input type="text" name="username" id="usernameLogin" placeholder='Username' value="" class="text-input form-control"
+                    autofocus>
+                <!-- </div> -->
+                <label class="error" for="username" id="usernameLoginError">This field is required</label>
+                <label class="error" id="usernameLoginWrong">Username not found</label>
+
+                <!-- PASSWORD -->
+                <!-- <div id='form-group'> -->
+                <input type="password" name="password" id="passwordLogin" placeholder='Password' class="text-input form-control">
+                <!-- </div> -->
+                <label class="error" for="password" id="passwordLoginError">This field is required</label>
+                <label class="error" id="passwordLoginWrong">Incorrect password</label>
+
+                <div class="clearfix"></div>
+                <div class='input-group' style='float:right'>
+                    <!-- LOGIN BUTTON -->
+                    <button type="submit" class="btn btn-lg btn-primary btn-block btn-signin" id='loginFormBtn'>Login</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <script src="../views/movieDetails.js"></script>
+    <script src="../models/Auth.js"></script>
+    <script src="../views/home.js"></script>
+    <script src="../views/register.js"></script>
+    <script src="../views/login.js"></script>
+    <script src="../views/logout.js"></script>
+</body>
+
+</html>
