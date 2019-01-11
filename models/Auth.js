@@ -6,7 +6,7 @@ function Register(dataString) {
         data: dataString,
         success: function (response) {
             console.log(response)
-            sessionStorage.setItem("AccesToken", response.accessToken);
+            localStorage.setItem("AccesToken", response.accessToken);
             var usernameReg = document.getElementById('usernameRegister').value;
             document.getElementById('register-dialog').close();
             document.getElementById('success-alert-register').style.display = 'block';
@@ -27,8 +27,7 @@ function Login(dataString2) {
         url: url + "auth/login",
         data: dataString2,
         success: function (response) {
-            console.log(response)
-            sessionStorage.setItem("AccesToken", response.accessToken);
+            localStorage.setItem("AccesToken", response.accessToken);
             var username = document.getElementById('usernameLogin').value;
             document.getElementById('login-dialog').close();
             document.getElementById('success-alert-login').style.display = 'block';
@@ -57,7 +56,7 @@ function Logout(token) {
         },
         success: function (response) {
             console.log(response);
-            sessionStorage.removeItem('AccesToken');
+            localStorage.removeItem('AccesToken');
             document.getElementById('success-alert-logout').style.display = 'block';
             hideAlert('success-alert-logout');
             hideButtonsAfterLogout();

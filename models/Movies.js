@@ -1,4 +1,4 @@
-var accesToken = sessionStorage.getItem('AccesToken');
+var accesToken = localStorage.getItem('AccesToken');
 
 function Movies() {
     this.items = [];
