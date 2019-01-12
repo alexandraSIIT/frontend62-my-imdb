@@ -1,3 +1,5 @@
+// CORRECT ACCESS TOKEN !!!! +1 s
+
 var url = "https://ancient-caverns-16784.herokuapp.com/"
 function Register(dataString) {
     $.ajax({

@@ -2,7 +2,7 @@ var movies = new Movies();
 
 getMovies();
 function getMovies() {
-  movies.getMovies(10, 0).then(function () {
+  movies.getMovies(12, 0).then(function () {
     displayMovies(movies.items);
     console.log(movies.items)
   });
@@ -64,7 +64,7 @@ function displayMovies(response) {
             removeExistentMovies();
             document.getElementById('succes-alert-delete-movie').style.display = 'block';
             hideAlert('succes-alert-delete-movie');
-            movies.getMovies(10, 0).then(function () {
+            movies.getMovies(12, 0).then(function () {
               displayMovies(movies.items);
             });
           });
@@ -100,7 +100,7 @@ function searchMovie() {
   var searchInputValue = searchInput.value;
   if (searchInputValue) {
     removeExistentMovies();
-    movies.getMovies(10, 0, selectedCategory, searchInputValue).then(function () {
+    movies.getMovies(12, 0, selectedCategory, searchInputValue).then(function () {
       displayMovies(movies.items);
     });
   } else {
@@ -141,7 +141,7 @@ function addPagination(category, searchValue) {
   firstPageBtn.className = 'anchor-page-nb';
   firstPageBtn.addEventListener('click', function () {
     removeExistentMovies();
-    movies.getMovies(10, 0, category, searchValue).then(function () {
+    movies.getMovies(12, 0, category, searchValue).then(function () {
       displayMovies(movies.items);
     });
   });
@@ -157,7 +157,7 @@ function addPagination(category, searchValue) {
   Array.from(document.getElementsByClassName('anchor-page-nb')).forEach(function (anchor, index) {
     anchor.addEventListener('click', function () {
       removeExistentMovies();
-      movies.getMovies(10, (index - 1) * 10, category, searchValue).then(function () {
+      movies.getMovies(12, (index - 1) * 12, category, searchValue).then(function () {
         displayMovies(movies.items);
       });
       anchor.className = 'active';
@@ -169,7 +169,7 @@ function addPagination(category, searchValue) {
   lastPageBtn.className = 'anchor-page-nb';
   lastPageBtn.addEventListener('click', function () {
     removeExistentMovies();
-    movies.getMovies(10, (movies.numberOfPages - 1) * 10, category, searchValue).then(function () {
+    movies.getMovies(12, (movies.numberOfPages - 1) * 12 , category, searchValue).then(function () {
       displayMovies(movies.items);
     });
   });
@@ -234,7 +234,7 @@ function addMovie() {
         document.getElementById('succes-alert-add-movie').style.display = 'block';
         hideAlert('succes-alert-add-movie');
         removeExistentMovies();
-        movies.getMovies(10, 0).then(function () {
+        movies.getMovies(12, 0).then(function () {
           displayMovies(movies.items);
         });
       },

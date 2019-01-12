@@ -49,8 +49,13 @@
     background-color: orange;
 }
 
+.inline-movie {
+    font-size: 24px;
+    font-weight: bold;
+}
+
 .template {
-    width: 50%;
+    width: 90%;
 }
 
 .myImage {
@@ -167,3 +172,37 @@ a.active {
 #confirm-dialog p {
     margin: 20px;
 }
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 768px) {
+    #movies {
+        background-color: lightgreen;
+    }
+    .template {
+        width: 80%;
+    }
+    .myImage {
+        height: 500px;
+    }
+    .inline-movie {
+        padding: 16px;
+    }
+    .movie-title {
+        height: 100px;
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+    #movies {
+        background-color: lightseagreen;
+    }
+}
+
+/* @media screen and (min-width: 1200px) {
+    #movies {
+        background-color: yellow;
+    }
+    
+} */
