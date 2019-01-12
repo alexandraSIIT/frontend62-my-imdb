@@ -56,7 +56,7 @@
 }
 
 .template {
-    width: 90%;
+    width: 100%;
 }
 
 .myImage {
@@ -178,9 +178,7 @@
     #movies {
         background-color: lightgreen;
     }
-    .template {
-        width: 80%;
-    }
+    
     .myImage {
         height: 500px;
     }
@@ -188,7 +186,7 @@
         padding: 16px;
     }
     .movie-title {
-        height: 100px;
+        height: 150px;
     }
 
 }
@@ -215,10 +213,7 @@
     text-align: center;
     width: 100%;
 }
-<<<<<<< HEAD
-=======
 
 .body {
     background-color:#131313
 }
->>>>>>> 16d1447d7e6f7c871693776290676f9098134d3c
