@@ -4,6 +4,7 @@
 <head>
     <title>IMDB Movies</title>
     <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../styles/auth.css" />
     <meta charset="UTF-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     </script>
@@ -19,26 +20,31 @@
 <body>
     <div class="alert alert-success fade in" id='success-alert-register' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> User successfully created!
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> User successfully created!
     </div>
     <div class="alert alert-success fade in" id='success-alert-login' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> User successfully logged in!
+        <strong><i class='fa fa-check' style="font-size:20px"></i>
+        </strong> User successfully logged in!
     </div>
     <div class="alert alert-success fade in" id='success-alert-logout' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> User successfully logged out!
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> User successfully logged out!
     </div>
     <div class="alert alert-success fade in" id='succes-alert-add-movie' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> Movie successfully added!
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> Movie successfully added!
     </div>
     <div class="alert alert-success fade in" id='succes-alert-delete-movie' style='display:none'>
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> Movie successfully deleted!
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> Movie successfully deleted!
     </div>
-    <nav class="navbar navbar-default navbar-expand-lg navbar-light">
-        <div class="collapse navbar-collapse justify-content-start">
+    <div class="alert alert-success fade in" id='succes-alert-edit-movie' style='display:none'>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong><i class='fa fa-check' style="font-size:20px"></i></strong> Movie successfully edited!
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="justify-content-start">
             <ul class="nav navbar-nav navbar-right ml-auto">
                 <li class='nav-item' id='logged-in'>
                 </li>
@@ -59,7 +65,7 @@
     </nav>
     <div class="search-header">
         <div class="inline search-box">
-            <h4>Search movies</h4>
+            <h4>Find your favorite movie!</h4>
             <select id="search-category">
                 <!-- <option value="all">All</option>  -->
                 <option value="Title">Title</option>
@@ -69,13 +75,14 @@
                 <option value="Type">Type</option>
             </select>
             <input id='movie-search' type="text" placeholder="Type a search parameter here..">
-            <button id="search-button" class="fa fa-search"></button>
+            <button id="search-button" class="btn fa fa-search"></button>
         </div>
     </div>
 
-    <button id="add-movie-button" style='display:none;'>Add new movie</button>
-    <dialog id="add-dialog">
-        <form class='container-fluid' id='add-movie-form'>
+    <button id="add-movie-button" class='btn fa fa-plus' style='display:none;' data-toggle="tooltip" title="Add new movie"></button>
+    <dialog id="add-dialog" class="card card-container">
+        <label class='control-label label-title'>Add a new movie</label>
+        <form class='container-fluid form-signin' id='add-movie-form'>
             <div class='form-group'>
                 <div class='col-sm-12'>
                     <label for='title' class='control-label'>Title*</label>
@@ -137,91 +144,200 @@
             </div>
 
             <div class="clearfix"></div>
-            <div class='input-group' style='float:right'>
-                <button id="cancel-dialog" class='btn'>Cancel</button>
+            <div>
                 <button type="submit" class="btn btn-primary" id='addNewMovieBtn'>Save</button>
+                <button id="cancel-dialog" class='btn'>Cancel</button>
             </div>
         </form>
     </dialog>
 
     <!-- LOGIN PART -->
-    <dialog id='login-dialog'>
-        <form name="form" id='login-form'>
+    <dialog class="card card-container" id='login-dialog'>
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png">
+        <form name="form" id='login-form' class='form-signin'>
             <!-- USERNAME -->
-            <div class='form-group'>
-                <input type="text" name="username" id="usernameLogin" placeholder='Username' value="" class="text-input form-control">
-            </div>
+            <input type="text" name="username" id="usernameLogin" placeholder='Username' value="" class="text-input form-control"
+                autofocus>
+            <!-- </div> -->
             <label class="error" for="username" id="usernameLoginError">This field is required</label>
             <label class="error" id="usernameLoginWrong">Username not found</label>
 
             <!-- PASSWORD -->
-            <div id='form-group'>
-                <input type="password" name="password" id="passwordLogin" value="" placeholder='Password' class="text-input form-control">
-            </div>
+            <input type="password" name="password" id="passwordLogin" placeholder='Password' class="text-input form-control">
+            <!-- </div> -->
             <label class="error" for="password" id="passwordLoginError">This field is required</label>
             <label class="error" id="passwordLoginWrong">Incorrect password</label>
 
             <div class="clearfix"></div>
-            <div class='input-group' style='float:right'>
-                <button id="cancel-login-dialog" class='btn'>Cancel</button>
+            <div>
                 <!-- LOGIN BUTTON -->
                 <button type="submit" class="btn btn-primary" id='loginFormBtn'>Login</button>
+                <button id="cancel-login-dialog" class='btn'>Cancel</button>
             </div>
         </form>
     </dialog>
 
     <!-- REGISTER PART -->
 
-    <dialog id='register-dialog' style='width:30%;height:50%;'>
-        <form name="form" id='register-form'>
+    <dialog id='register-dialog' class="card card-container">
+        <form name="form" id='register-form' class='form-signin'>
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png">
             <!-- USERNAME -->
-            <div class='form-group'>
-                <input type="text" name="usernameRegister" id="usernameRegister" placeholder='Username' class="text-input form-control">
-            </div>
+            <input type="text" name="usernameRegister" id="usernameRegister" placeholder='Username' class="text-input form-control"
+                autofocus>
             <label class="error" for="usernameRegister" id="usernameRegisterError">This field is required</label>
             <label class="error" id="takenUsername">Username is taken!</label>
 
             <!-- EMAIL -->
-            <div class='form-group'>
-                <input type="text" name="email" id="email" placeholder='Email' class="text-input form-control">
-            </div>
+            <input type="text" name="email" id="email" placeholder='Email' class="text-input form-control">
             <label class="error" for="email" id="emailError">This field is required!</label>
             <label class="error" for="email" id="emailValidError">Enter a valid e-mail address!</label>
 
             <!-- PASSWORD -->
-            <div id='form-group'>
-                <input type="password" name="password" id="passwordRegister" placeholder='Password' class="text-input form-control">
-            </div>
+            <input type="password" name="password" id="passwordRegister" placeholder='Password' class="text-input form-control">
             <label class="error" for="password" id="passwordRegisterError">This field is required!</label>
 
             <!-- RE PASSWORD -->
-            <div id='form-group'>
-                <input type="password" name="rePassword" id="rePasswordRegister" placeholder='Re-enter password' class="text-input form-control">
-            </div>
+            <input type="password" name="rePassword" id="rePasswordRegister" placeholder='Re-enter password' class="text-input form-control">
             <label class="error" for="r-password" id="rePasswordRegisterError">This field is required!</label>
 
             <!-- NO MATCH PW -->
             <label class="error" for="match-password" id="passwordRegisterMatch">Passwords do not match!</label>
 
             <div class="clearfix"></div>
-            <div class='input-group' style='float:right'>
-                <button id="cancel-register-dialog" class='btn'>Cancel</button>
+            <div>
                 <!-- REGISTER BUTTON -->
                 <button type="submit" class="btn btn-primary" id='registerFormBtn'>Register</button>
+                <button id="cancel-register-dialog" class='btn'>Cancel</button>
             </div>
         </form>
     </dialog>
-    </form>
+    <!-- </form> -->
+    <dialog id="movie-details-dialog">
+        <div class="details-dialog-header">
+            <span class="details-dialog-close">&times;</span>
+            <h3 class="title"></h3>
+        </div>
+        <p class="poster"></p>
+        <p class="type"></p>
+        <p class="genre"></p>
+        <p class="runtime"></p>
+        <p class="year"></p>
+        <p class="rated"></p>
+        <p class="rating"></p>
+        <p class="metascore"></p>
+        <p class="language"></p>
+        <p class="country"></p>
+        <p class="production"></p>
+        <p class="director"></p>
+        <p class="writer"></p>
+        <p class="actors"></p>
+        <p class="plot"></p>
+        <p class="awards"></p>
+        <p class="dvd"></p>
+        <p class="box-office"></p>
+    </dialog>
+
+    <div>
+        <dialog id="edit-movie-dialog">
+            <div class="edit-dialog-header">
+                <span class="modal-close">&times;</span>
+                <h2>Edit Movie Details</h2>
+            </div>
+            <form class="edit-movie-form">
+
+                <label for='title'>Title</label>
+                <input class="editTitle">
+                <br>
+
+                <label for='year'>Year</label>
+                <input class="editYear">
+                <br>
+
+                <label for='rated'>Rated</label>
+                <input class="editRated">
+                <br>
+
+                <label for='runtime'>Runtime</label>
+                <input class="editRuntime">
+                <br>
+
+                <label for='genre'>Genre</label>
+                <input class="editGenre">
+                <br>
+
+                <label for='director'>Director</label>
+                <input class="editDirector">
+                <br>
+
+
+                <label for='writer'>Writer</label>
+                <input class="editWriter">
+                <br>
+
+                <label for='actors'>Actors</label>
+                <input class="editActors">
+                <br>
+
+                <label for='plot'>Plot</label>
+                <input class="editPlot">
+                <br>
+
+                <label for='language'>Language</label>
+                <input class="editLanguage">
+                <br>
+
+                <label for='country'>Country</label>
+                <input class="editCountry">
+                <br>
+
+                <label for='awards'>Awards</label>
+                <input class="editAwards">
+                <br>
+
+                <label for='poster'>Poster</label>
+                <input class="editPoster">
+                <br>
+
+                <label for='metascore'>Metascore</label>
+                <input class="editMetascore">
+                <br>
+
+                <label for='rating'>IMDB Rating</label>
+                <input class="editRating">
+                <br>
+
+                <label for='type'>Type</label>
+                <input class="editType">
+                <br>
+
+                <label for='dvd'>DVD</label>
+                <input class="editDvd">
+                <br>
+
+                <label for='box-office'>Box office</label>
+                <input class="editBoxoffice">
+                <br>
+
+                <label for='production'>Production</label>
+                <input class="editProduction">
+                <br>
+
+                <button class="submit-updates">Save</button>
+            </form>
+        </dialog>
+    </div>
 
     <!----COFIRM DELETE MOVIE -->
-    <dialog id='confirm-dialog'>
+    <dialog id='confirm-dialog' class='form-signin card-container'>
         <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel"><span class="fa fa-question" style="font-size:24px"></span> Confirm delete</h4>
+            <h4 class="modal-title" id="myModalLabel"><span class="fa fa-question-circle" style="font-size:24px"></span>
+                Confirm delete</h4>
         </div>
         <p> Are you sure you want to delete this movie?</p>
-        <div class='input-group' style='float:right'>
-            <button id="cancel-confirm-dialog" class='btn'>Cancel</button>
+        <div>
             <button type="submit" class="btn btn-primary" id='confirmDelete'>Delete</button>
+            <button id="cancel-confirm-dialog" class='btn'>Cancel</button>
         </div>
     </dialog>
 
@@ -235,21 +351,20 @@
             <!-- <p class="genre"></p> -->
             <!-- <p class="year"></p> -->
             <div>
-                <button class="movie-delete" style='display:none;'>Delete</button>
-                <button class="movie-edit" style='display:none;'>Edit</button>
+                <button class="movie-delete  btn fa fa-trash-o" style='display:none;' data-toggle="tooltip" title="Delete"></button>
+                <button class="movie-edit btn fa fa-pencil" style='display:none;' data-toggle="tooltip" title="Edit"></button>
             </div>
         </div>
     </div>
     <div id='pagination'></div>
 
-    <!-- </main> -->
-    <!-- <footer>Created at 01/01/2019 by CodeForFood 62 Frontend Team</footer> -->
-
+    <script src="../views/movieDetails.js"></script>
     <script src="../models/Auth.js"></script>
     <script src="../views/home.js"></script>
     <script src="../views/register.js"></script>
     <script src="../views/login.js"></script>
     <script src="../views/logout.js"></script>
+
 </body>
 
 </html>

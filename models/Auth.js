@@ -9,11 +9,12 @@ function Register(dataString) {
         success: function (response) {
             console.log(response)
             localStorage.setItem("AccesToken", response.accessToken);
+            var usernameReg = document.getElementById('usernameRegister').value;
             document.getElementById('register-dialog').close();
             document.getElementById('success-alert-register').style.display = 'block';
             hideAlert('success-alert-register');
             document.getElementById('register-form').reset();
-            displayButtons();
+            displayButtons(usernameReg);
         },
         error: function () {
             $("label#takenUsername").show();
@@ -28,13 +29,13 @@ function Login(dataString2) {
         url: url + "auth/login",
         data: dataString2,
         success: function (response) {
-            console.log(response)
             localStorage.setItem("AccesToken", response.accessToken);
+            var username = document.getElementById('usernameLogin').value;
             document.getElementById('login-dialog').close();
             document.getElementById('success-alert-login').style.display = 'block';
             hideAlert('success-alert-login');
             document.getElementById('login-form').reset();
-            displayButtons();
+            displayButtons(username);
         },
         error: function (response) {
             if (response.responseJSON.message == "User not found") {

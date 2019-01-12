@@ -1,193 +1,131 @@
-var movie = new Movie ();
-movie.id = getUrlParameter('id');
+var movie = new Movie();
 
-movie.getMovieDetails(movie.id).then(function(response){
-    // displayMovieTitle(response)
-    displayMovieDetails(response);
-})
+function displayMovieDetails(response, dialog) {
+  console.log('Movie details:', response)
 
+  var title = dialog.querySelector(".title");
+  title.innerHTML = response.title;
 
-function getUrlParameter(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-    var results = regex.exec(location.search);
-    return results === null
-      ? ""
-      : decodeURIComponent(results[1].replace(/\+/g, " "));
+  var year = dialog.querySelector(".year");
+  if (response.year !== 'N/A') {
+    year.innerHTML = "Release date: " + response.year
+  } else {
+    year.style.display = 'none'
   }
 
-function displayMovieTitle (response){
-var title = document.querySelector(".movie-title")
-title.innerHTML = response.title
-}
+  var rated = dialog.querySelector(".rated");
+  if (response.rated == 'N/A' || response.rated == 'UNRATED' || response.rated == 'NOT RATED') {
+    rated.style.display = 'none'
+  } else {
+    rated.innerHTML = "Rated: " + response.rated
+  }
 
-function displayMovieDetails (response){
+  var runtime = dialog.querySelector(".runtime");
+  if (response.runtime !== 'N/A') {
+    runtime.innerHTML = "Runtime: " + response.runtime
+  } else {
+    runtime.style.display = 'none'
+  }
 
-    var title = document.querySelector(".title");
-    title.innerHTML = response.title;
+  var genre = dialog.querySelector(".genre");
+  if (response.genre !== 'N/A') {
+    genre.innerHTML = "Genre: " + response.genre
+  } else {
+    genre.style.display = 'none'
+  }
 
-    var year = document.querySelector(".year");
-    year.innerHTML = "Release date: " + response.year;
+  var director = dialog.querySelector(".director");
+  if (response.director !== 'N/A') {
+    director.innerHTML = "Directed by: " + response.director
+  } else {
+    director.style.display = 'none'
+  }
 
-    var rated = document.querySelector(".rated");
-    rated.innerHTML = "Rated: " + response.rated;
+  var writer = dialog.querySelector(".writer");
+  if (response.writer !== 'N/A') {
+    writer.innerHTML = "Written by: " + response.writer
+  } else {
+    writer.style.display = 'none'
+  }
 
-    var runtime = document.querySelector(".runtime");
-    runtime.innerHTML = "Runtime: " + response.runtime;
-
-    var genre = document.querySelector(".genre");
-    genre.innerHTML = "Genre: " + response.genre;
-
-    var director = document.querySelector(".director");
-    director.innerHTML = "Directed by: " + response.director;
-
-    var writer = document.querySelector(".writer");
-    writer.innerHTML = "Written by: " + response.writer;
-
-    var actors = document.querySelector(".actors");
+  var actors = dialog.querySelector(".actors");
+  if (response.actors !== 'N/A') {
     actors.innerHTML = "Actor List: " + response.actors;
+  } else {
+    actors.style.display = "none"
+  }
 
-    var plot = document.querySelector(".plot");
-    plot.innerHTML = "Plot: " + response.plot;
+  var plot = dialog.querySelector(".plot")
+  if (response.plot !== 'N/A') {
+    plot.innerHTML = "Plot: " + response.plot
+  } else {
+    plot.style.display = 'none'
+  }
 
-    var language = document.querySelector(".language");
-    language.innerHTML = "Language: " + response.language;
+  var language = dialog.querySelector(".language");
+  if (response.dvd !== 'N/A') {
+    language.innerHTML = "Language: " + response.language
+  } else {
+    language.style.display = 'none'
+  }
 
-    var country = document.querySelector(".country");
-    country.innerHTML = "Country: " + response.country;
+  var country = dialog.querySelector(".country");
+  if (response.country !== 'N/A') {
+    country.innerHTML = "Country: " + response.country
+  } else {
+    country.style.display = 'none'
+  }
 
-    var awards = document.querySelector(".awards");
-    awards.innerHTML = "Awards Received: " + response.awards;
+  var awards = dialog.querySelector(".awards");
+  if (response.awards !== 'N/A') {
+    awards.innerHTML = "Awards Received: " + response.awards
+  } else {
+    awards.style.display = 'none'
+  }
 
-    var poster = document.querySelector(".poster");
-    if (response.poster == 'N/A' || response.poster == '') {
-        poster.innerHTML = "<img src='../movie-default-image.jpg'>"
-      } else {
-        poster.innerHTML = "<img src='" + response.poster + "' alt = 'movie poster'/>"
-      }
-    
-    var metascore = document.querySelector(".metascore");
+  var poster = dialog.querySelector(".poster");
+  if (response.poster == 'N/A' || response.poster == '') {
+    poster.innerHTML = "<img src='../movie-default-image.jpg'>"
+  } else {
+    poster.innerHTML = "<img src='" + response.poster + "' alt = 'movie poster'/>"
+  }
+
+  var metascore = dialog.querySelector(".metascore");
+  if (response.metascore !== 'N/A') {
     metascore.innerHTML = "Metascore: " + response.metascore;
+  } else {
+    metascore.style.display = 'none'
+  }
 
-    var rating = document.querySelector(".rating");
-    rating.innerHTML = "IMDB Score: " + response.rating;
+  var rating = dialog.querySelector(".rating");
+  if (response.rating !== 'N/A') {
+    rating.innerHTML = "IMDB Score: " + response.rating
+  } else {
+    rating.style.display = 'none'
+  }
 
-    var type = document.querySelector(".type");
-    type.innerHTML = "Type: " + response.type;
+  var type = dialog.querySelector(".type");
+  type.innerHTML = "Type: " + response.type;
 
-    var dvd = document.querySelector(".dvd");
-    dvd.innerHTML = "DVD: " + response.dvd;
+  var dvd = dialog.querySelector(".dvd");
+  if (response.dvd !== 'N/A') {
+    dvd.innerHTML = "DVD: " + response.dvd
+  } else {
+    dvd.style.display = 'none'
+  }
 
-    var boxOffice = document.querySelector(".box-office");
+  var boxOffice = dialog.querySelector(".box-office");
+  if (response.boxOffice !== 'N/A') {
     boxOffice.innerHTML = "Box Office: " + response.boxOffice;
+  } else {
+    boxOffice.style.display = 'none'
+  }
 
-    var production = document.querySelector(".production");
-    production.innerHTML = "Produced by: " + response.production;
-    
-}
-
-var modal = document.getElementById('editMovieModal');
-var editButton = document.querySelector (".edit")[0];
-editButton.onclick = function() {
-    modal.style.display = "block";
-    var inputTitle = document.getElementById("editTitle");
-    inputTitle.value = movie.title;
-
-    var inputYear = document.getElementById("editYear");
-    inputYear.value = movie.year;
-        
-    var inputRated = document.getElementById("editRated");
-    inputRated.value = movie.rated;
-        
-    var inputRuntime = document.getElementById("editRuntime");
-    inputRuntime.value = movie.runtime;
-      
-    var inputGenre = document.getElementById("editGenre");
-    inputGenre.value = movie.genre;
-
-    var inputDirector = document.getElementById("editDirector");
-    inputDirector.value = movie.director;
-
-    var inputWriter = document.getElementById("editWriter");
-    inputWriter.value = movie.writer;
-        
-    var inputActors = document.getElementById("editActors");
-    inputActors.value = movie.actors;
-        
-    var inputPlot = document.getElementById("editPlot");
-    inputPlot.value = movie.plot;
-        
-    var inputLanguage = document.getElementById("editLanguage");
-    inputLanguage.value = movie.language;
-        
-    var inputCountry = document.getElementById("editCountry");
-    inputCountry.value = movie.country;
-        
-    var inputAwards = document.getElementById("editAwards");
-    inputAwards.value = movie.awards;
-        
-    var inputPoster = document.getElementById("editPoster");
-    inputPoster.value = movie.poster;
-        
-    var inputMetascore = document.getElementById("editMetascore");
-    inputMetascore.value = movie.metascore;
-        
-    var inputRating = document.getElementById("editRating");
-    inputRating.value = movie.rating;
-
-    var inputType = document.getElementById("editType");
-    inputType.value = movie.type;
-        
-    var inputDvd = document.getElementById("editDvd");
-    inputDvd.value = movie.dvd;
-        
-    var inputBoxOffice = document.getElementById("editBoxoffice");
-    inputBoxOffice.value = movie.boxOffice;
-        
-    var inputProduction = document.getElementById("editProduction");
-    inputProduction.value = movie.production;
-
-    var updateButton = document.querySelector(".submit-updates")
-      updateButton.onclick = function (event){
-          event.preventDefault();
-          var inputNewTitle = document.getElementById("editTitle");
-          inputNewTitle.value = document.getElementById("editTitle").innerText;
-                    var movie = new Movie({
-                       title: inputNewTitle.value,
-                       year: inputYear.value,
-                       rated: inputRated,
-                       runtime: inputRuntime,
-                       genre: inputGenre,
-                       director: inputDirector,
-                       writer: inputWriter,
-                       actors: inputActors,
-                       plot: inputPlot,
-                       language: inputLanguage,
-                       country: inputCountry,
-                       awards: inputAwards,
-                       poster: inputPoster,
-                       metascore: inputMetascore,
-                       rating: inputRating,
-                       type: inputType,
-                       dvd: inputDvd,
-                       boxOffice: inputBoxOffice,
-                       production: inputProduction
-                   });
-                  movie.updateMovieDetails(movie.id)
-               }
+  var production = dialog.querySelector(".production");
+  if (response.production !== 'N/A') {
+    production.innerHTML = "Produced by: " + response.production
+  } else {
+    production.style.display = 'none'
+  }
 
 }
-
-var closeButton = document.querySelector(".close");
-    closeButton.onclick = function() {
-        modal.style.display = "none";
-      }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      }
-
-
-      

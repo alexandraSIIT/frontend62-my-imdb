@@ -25,10 +25,10 @@ function Movie(options = {}) {
 
 var apiRootUrl = "https://ancient-caverns-16784.herokuapp.com/movies/";
 
-Movie.prototype.getMovieDetails = function (id) {
+Movie.prototype.getMovieDetails = function (movieId) {
   var that = this;
   return $.ajax({
-    url: apiRootUrl + id,
+    url: apiRootUrl + movieId,
     method: "GET"
   }).then(function (response) {
     console.log(response);
@@ -58,10 +58,13 @@ Movie.prototype.getMovieDetails = function (id) {
 
 Movie.prototype.updateMovieDetails = function () {
   var that = this
+  console.log("something", that, this)
   return $.ajax({
-    url: apiRootUrl + id,
+    url: apiRootUrl + that.id,
     method: "PUT",
-    headers: { "x-auth-token": accesToken },
+    headers: { 
+      "X-Auth-Token": accesToken 
+    },
     data: {
       Title: that.title,
       Year: that.year,
@@ -82,7 +85,6 @@ Movie.prototype.updateMovieDetails = function () {
       DVD: that.dvd,
       BoxOffice: that.boxOffice,
       Production: that.production
-    },
-    processData: false
+    }
   })
 }

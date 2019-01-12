@@ -17,9 +17,8 @@
 
 #movie-search, #search-category {
     border: none;
-    border-radius: 3px 0 0 3px;
+    border-radius: 3px;
     box-shadow: 1px 1px 1px rgba(0,0,0,0.4) inset;
-    font: 14px Verdana, Arial, sans-serif;
     padding: 5px 8px;
     vertical-align: middle;
 }
@@ -71,7 +70,7 @@
     cursor: pointer;
 }
 
-a.active {
+.active {
     background-color: dodgerblue;
     color: white;
   }
@@ -80,13 +79,10 @@ a.active {
     text-align: center;
 }  
 
-/* footer {
-    display: block
-} */
-
 #add-dialog {
-    width: 70%;
-    height: 100%;
+    max-width: 800px;
+    min-height: 500px;
+    padding: 10px;
 }
 
 .btn-primary {
@@ -165,8 +161,9 @@ a.active {
 }
 
 #confirm-dialog {
-    width: 30%;
-    height: 45%;
+    border: none;
+    background-color: #F7F7F7;
+    border-radius: 2px;
 }
 
 #confirm-dialog p {
@@ -206,3 +203,13 @@ a.active {
     }
     
 } */
+.navbar {
+    margin-bottom: 0 !important;
+    border: none !important;
+}
+
+.label-title {
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+}
