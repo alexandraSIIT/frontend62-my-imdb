@@ -25,8 +25,8 @@ function displayMovies(response) {
     movieTitleElement.addEventListener("click", function (event) {
 
       getMovieDetails(event.target, movie);
-      // window.open("/pages/movieDetails.html?id=" + movie.id,
-      //   '_blank');
+      window.open("/pages/movieDetails.html?id=" + movie.id,
+        '_blank');
     })
     var imageUrl = movieClone.querySelector(".myImage");
     if (response[i].poster == 'N/A' || response[i].poster == '') {
@@ -410,11 +410,22 @@ function editMovie(event) {
 }
 
 function getMovieDetails(clickedButton, movieObject) {
-  console.log(clickedButton);
   var grandpa = clickedButton.parentNode.parentNode;
   var grandpaId = grandpa.id;
   var movieId = grandpaId.replace("movie_", "");
-  console.log(movieId)
+
+  movieObject.getMovieDetails(movieId).then(
+    function (response) {
+      displayMovieDetails(response);
+      console.log(response)
+    },
+    function (error) {
+      displayError(error);
+    }
+  );
+}
+
+function displayFewDetails() {
   var detailsDialog = document.getElementById("movie-details-dialog")
   var detailsDialogClone = detailsDialog.cloneNode(true);
   detailsDialogClone.id = movieId;
@@ -426,17 +437,6 @@ function getMovieDetails(clickedButton, movieObject) {
     detailsDialogClone.close()
     detailsDialogClone.remove()
   }
-
-
-  movieObject.getMovieDetails(movieId).then(
-    function (response) {
-      displayMovieDetails(response, detailsDialogClone);
-      console.log(response)
-    },
-    function (error) {
-      displayError(error);
-    }
-  );
 }
 
 function displayError(error) {
