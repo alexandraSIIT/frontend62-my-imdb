@@ -281,3 +281,7 @@
 button[class='fa']::before {
     background: transparent;
 }
+
+#edit-movie-dialog {
+    min-width: 700px;
+}

@@ -228,91 +228,116 @@
     </dialog>
 
     <div>
-        <dialog id="edit-movie-dialog">
+        <dialog id="edit-movie-dialog" class="card card-container">
             <div class="edit-dialog-header">
-                <span class="modal-close">&times;</span>
-                <h2>Edit Movie Details</h2>
+                <h4 style='text-align: center;'>Edit movie</h4>
             </div>
-            <form class="edit-movie-form">
+            <form class="edit-movie-form container-fluid form-signin">
+                <div class='form-group'>
+                    <div class='col-sm-7'>
+                        <label for='title' class='control-label'>Title*</label>
+                        <input class="editTitle form-control">
+                    </div>
+                    <div class='col-sm-5'>
+                        <label for='genre' class='control-label'>Genre*</label>
+                        <input class='editGenre form-control'>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-sm-4'>
+                        <label for='director' class='control-label'>Director</label>
+                        <input class='editDirector form-control'>
+                    </div>
+                    <div class='col-sm-4'>
+                        <label for='writer' class='control-label'>Writer</label>
+                        <input class='editWriter form-control'>
+                    </div>
+                    <div class='col-sm-4'>
+                        <label for='production' class='control-label'>Production</label>
+                        <input class='editProduction form-control'>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-sm-4'>
+                        <label for='rated' class='control-label'>Rated</label>
+                        <input class='editRated form-control'>
+                    </div>
+                    <div class='col-sm-4'>
+                        <label for='metascore' class='control-label'>Metascore</label>
+                        <input class='editMetascore form-control'>
+                    </div>
+                    <div class='col-sm-4'>
+                        <label for='rating' class='control-label'>IMDB Rating</label>
+                        <input class='editRating form-control'>
+                    </div>
+                </div>
 
-                <label for='title'>Title</label>
-                <input class="editTitle">
-                <br>
 
-                <label for='year'>Year</label>
-                <input class="editYear">
-                <br>
+                <div class='form-group'>
 
-                <label for='rated'>Rated</label>
-                <input class="editRated">
-                <br>
+                    <div class='col-sm-3'>
+                        <label for='type' class='control-label'>Type</label>
+                        <input class='editType form-control'>
+                    </div>
+                    <div class='col-sm-3'>
+                        <label for='year' class='control-label'>Year*</label>
+                        <input class='editYear form-control'>
+                    </div>
+                    <div class='col-sm-3'>
+                        <label for='runtime' class='control-label'>Runtime*</label>
+                        <input class='editRuntime form-control'>
+                    </div>
+                    <div class='col-sm-3'>
+                        <label for='awards' class='control-label'>Awards</label>
+                        <input class='editAwards form-control'>
+                    </div>
 
-                <label for='runtime'>Runtime</label>
-                <input class="editRuntime">
-                <br>
-
-                <label for='genre'>Genre</label>
-                <input class="editGenre">
-                <br>
-
-                <label for='director'>Director</label>
-                <input class="editDirector">
-                <br>
+                </div>
 
 
-                <label for='writer'>Writer</label>
-                <input class="editWriter">
-                <br>
+                <div class='form-group'>
+                    <div class='col-sm-3'>
+                        <label for='box-office' class='control-label'>Box office</label>
+                        <input class='editBoxoffice form-control'>
+                    </div>
+                    <div class='col-sm-3'>
+                        <label for='language' class='control-label'>Language</label>
+                        <input class='editLanguage form-control'>
+                    </div>
+                    <div class='col-sm-3'>
+                        <label for='country' class='control-label'>Country</label>
+                        <input class='editCountry form-control'>
+                    </div>
+                    <div class='col-sm-3'>
+                        <label for='dvd' class='control-label'>DVD</label>
+                        <input class='editDvd form-control'>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-sm-12'>
+                        <label for='plot' class='control-label'>Plot</label>
+                        <input class="editPlot form-control">
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-sm-12'>
+                        <label for='actors' class='control-label'>Actors</label>
+                        <input class="editActors form-control">
+                    </div>
+                </div>
 
-                <label for='actors'>Actors</label>
-                <input class="editActors">
-                <br>
+                <div class='form-group'>
+                    <div class='col-sm-12'>
+                        <label for='poster' class='control-label'>Poster</label>
+                        <input class="editPoster form-control">
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div>
+                    <button type="submit" class="submit-updates btn btn-primary">Save</button>
+                    <button class='modal-close btn'>Cancel</button>
+                </div>
 
-                <label for='plot'>Plot</label>
-                <input class="editPlot">
-                <br>
-
-                <label for='language'>Language</label>
-                <input class="editLanguage">
-                <br>
-
-                <label for='country'>Country</label>
-                <input class="editCountry">
-                <br>
-
-                <label for='awards'>Awards</label>
-                <input class="editAwards">
-                <br>
-
-                <label for='poster'>Poster</label>
-                <input class="editPoster">
-                <br>
-
-                <label for='metascore'>Metascore</label>
-                <input class="editMetascore">
-                <br>
-
-                <label for='rating'>IMDB Rating</label>
-                <input class="editRating">
-                <br>
-
-                <label for='type'>Type</label>
-                <input class="editType">
-                <br>
-
-                <label for='dvd'>DVD</label>
-                <input class="editDvd">
-                <br>
-
-                <label for='box-office'>Box office</label>
-                <input class="editBoxoffice">
-                <br>
-
-                <label for='production'>Production</label>
-                <input class="editProduction">
-                <br>
-
-                <button class="submit-updates">Save</button>
             </form>
         </dialog>
     </div>

@@ -39,11 +39,11 @@ function displayMovies(response) {
     if (response[i].rating) {
       movieRatingElement.innerHTML = `Imdb score: ` + response[i].rating;
     }
-   
+
     var deleteButton = movieClone.querySelector(".movie-delete");
     var confirmDialog = document.getElementById('confirm-dialog');
     deleteButton.addEventListener("click", function (event) {
-      var grandpa = event.target.parentNode.parentNode;
+      var grandpa = event.target.parentNode.parentNode.parentNode;
       var grandpaId = grandpa.id;
       var movieId = grandpaId.replace("movie_", "");
       confirmDialog.showModal();
@@ -276,12 +276,13 @@ function addMovie() {
 
 function editMovie(event) {
   var editDialog = document.getElementById("edit-movie-dialog")
-  var source = event.target.parentNode.parentNode
+  var source = event.target.parentNode.parentNode.parentNode;
   var sourceId = source.id
   var movieId = sourceId.replace("movie_", "");
   var movie = new Movie();
 
   movie.getMovieDetails(movieId).then(function (response) {
+    console.log(response)
     var inputTitle = document.querySelector(".editTitle");
     inputTitle.value = response.title;
 
@@ -389,10 +390,20 @@ function editMovie(event) {
       boxOffice: inputBoxOffice.value,
       production: inputProduction.value
     });
-    movie.updateMovieDetails()
+    movie.updateMovieDetails();
+    editDialog.close();
+    document.querySelector(".edit-movie-form").reset();
+    document.getElementById('succes-alert-edit-movie').style.display = 'block';
+    hideAlert('succes-alert-edit-movie');
+    removeExistentMovies();
+    movies.getMovies(12, 0).then(function () {
+      displayMovies(movies.items);
+      console.log(movies.items)
+    });
   })
   var closeButton = document.querySelector(".modal-close");
-  closeButton.onclick = function () {
+  closeButton.onclick = function (event) {
+    event.preventDefault();
     editDialog.close();
     document.querySelector(".edit-movie-form").reset()
   }
