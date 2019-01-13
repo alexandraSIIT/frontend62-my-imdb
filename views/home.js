@@ -34,15 +34,12 @@ function displayMovies(response) {
     } else {
       imageUrl.setAttribute("src", response[i].poster);
     }
+
     var movieRatingElement = movieClone.querySelector(".rating");
     if (response[i].rating) {
       movieRatingElement.innerHTML = `Imdb score: ` + response[i].rating;
     }
-    // var movieGenreElement = movieClone.querySelector(".genre");
-    // movieGenreElement.innerHTML = response[i].genre;
-    // var movieYearElement = movieClone.querySelector(".year");
-    // movieYearElement.innerHTML = response[i].year;
-
+   
     var deleteButton = movieClone.querySelector(".movie-delete");
     var confirmDialog = document.getElementById('confirm-dialog');
     deleteButton.addEventListener("click", function (event) {
@@ -282,7 +279,6 @@ function editMovie(event) {
   var source = event.target.parentNode.parentNode
   var sourceId = source.id
   var movieId = sourceId.replace("movie_", "");
-  //  console.log("ad", source)
   var movie = new Movie();
 
   movie.getMovieDetails(movieId).then(function (response) {
@@ -352,7 +348,6 @@ function editMovie(event) {
   updateButton.addEventListener('click', function (event) {
     event.preventDefault();
     var inputTitle = document.querySelector(".editTitle");
-    console.log('Title:', inputTitle.value)
     var inputYear = document.querySelector(".editYear");
     var inputRated = document.querySelector(".editRated");
     var inputRuntime = document.querySelector(".editRuntime");
@@ -423,20 +418,6 @@ function getMovieDetails(clickedButton, movieObject) {
       displayError(error);
     }
   );
-}
-
-function displayFewDetails() {
-  var detailsDialog = document.getElementById("movie-details-dialog")
-  var detailsDialogClone = detailsDialog.cloneNode(true);
-  detailsDialogClone.id = movieId;
-  detailsDialogClone.className = 'movie-details';
-  document.body.appendChild(detailsDialogClone);
-  detailsDialogClone.showModal();
-  var closeButton = detailsDialogClone.querySelector(".details-dialog-close");
-  closeButton.onclick = function () {
-    detailsDialogClone.close()
-    detailsDialogClone.remove()
-  }
 }
 
 function displayError(error) {
