@@ -53,6 +53,9 @@
 .inline-movie {
     font-size: 24px;
     font-weight: bold;
+    position: absolute;
+    bottom: 20px;
+    right: 0;
 }
 
 .template {
@@ -65,10 +68,12 @@
     background-color: whitesmoke;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 25px;
+    min-height: 377px;
 }
 
 .myImage {
     width: 100%;
+    min-height: 300px;
 }
 
 .anchor-page-nb {
@@ -204,6 +209,8 @@
     }
     .inline-movie {
         padding: 16px;
+        position: absolute;
+        bottom: 20px;
     }
     .movie-title {
         text-align: center;

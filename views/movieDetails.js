@@ -26,7 +26,7 @@ function displayMovieDetails(response) {
     year.style.display = 'none'
   }
 
-  var rated = document.querySelector(".rated");
+  var rated = document.querySelector(".ratedD");
   if (response.rated == 'N/A' || response.rated == 'UNRATED' || response.rated == 'NOT RATED') {
     rated.style.display = 'none'
   } else {
