@@ -9,7 +9,8 @@ function Register(dataString) {
         success: function (response) {
             console.log(response)
             localStorage.setItem("AccesToken", response.accessToken);
-            var usernameReg = document.getElementById('usernameRegister').value;
+            localStorage.setItem('username', document.getElementById('usernameRegister').value)
+            var usernameReg = localStorage.getItem('username');
             document.getElementById('register-dialog').close();
             document.getElementById('success-alert-register').style.display = 'block';
             hideAlert('success-alert-register');
@@ -30,7 +31,8 @@ function Login(dataString2) {
         data: dataString2,
         success: function (response) {
             localStorage.setItem("AccesToken", response.accessToken);
-            var username = document.getElementById('usernameLogin').value;
+            localStorage.setItem('username', document.getElementById('usernameLogin').value)
+            var username = localStorage.getItem('username');
             document.getElementById('login-dialog').close();
             document.getElementById('success-alert-login').style.display = 'block';
             hideAlert('success-alert-login');
@@ -59,6 +61,7 @@ function Logout(token) {
         success: function (response) {
             console.log(response);
             localStorage.removeItem('AccesToken');
+            localStorage.removeItem('username');
             document.getElementById('success-alert-logout').style.display = 'block';
             hideAlert('success-alert-logout');
             hideButtonsAfterLogout();

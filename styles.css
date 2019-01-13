@@ -66,12 +66,13 @@
 }
 
 .anchor-page-nb {
-    color: black;
-    float: left;
-    padding: 8px 16px;
+    color: white;
+    padding: 8px 12px;
     text-decoration: none;
     transition: background-color .3s;
     cursor: pointer;
+    position: relative;
+    bottom: -5px;
 }
 
 .active {
@@ -87,6 +88,14 @@
     max-width: 800px;
     min-height: 500px;
     padding: 10px;
+}
+
+#add-movie-button {
+    background-color: royalblue;
+    float: right;
+    margin-top: 23px;
+    color: white;
+    width: 35px;
 }
 
 .btn-primary {
@@ -230,4 +239,32 @@
 
 .row{
     margin-right: -10px !important;
+}
+
+#logged-in {
+    color:white;
+}
+
+.img .btnEdit, .img .btnDelete {
+    position: absolute;
+    top: 72%;
+    font-size: 13px;
+    /* padding: 12px 24px; */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    color: darkslategrey;
+}
+
+.img .btnEdit {
+    left: 74%;
+}
+
+.img .btnDelete {
+    left: 82%;
+}
+
+button[class='fa']::before {
+    background: transparent;
 }

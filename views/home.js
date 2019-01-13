@@ -157,7 +157,7 @@ function addPagination(category, searchValue) {
   Array.from(document.querySelectorAll('.anchor-page-nb:not(.firstPage)')).forEach(function (anchor, index) {
     anchor.addEventListener('click', function (event) {
       removeExistentMovies();
-      movies.getMovies(12, (index - 1) * 12, category, searchValue).then(function () {
+      movies.getMovies(12, (index) * 12, category, searchValue).then(function () {
         displayMovies(movies.items);
         var anchors = document.getElementsByClassName('anchor-page-nb');
         for (var i = 0; i < anchors.length; i++) {
@@ -483,9 +483,17 @@ registerBtn.addEventListener('click', function () {
   }
 })
 
+displayButtonsAfterLogin();
+function displayButtonsAfterLogin() {
+  var username = localStorage.getItem('username');
+  if (accesToken) {
+    displayButtons(username);
+  }
+}
+
 function displayButtons(username) {
   document.getElementById('logged-in').style.display = 'block';
-  document.getElementById('logged-in').innerHTML = `<p>You are logged in as<strong>${username}!</strong></p>`;
+  document.getElementById('logged-in').innerHTML = `<p>You are logged in as<strong><i>${username}</i></strong>!</p>`;
   document.getElementById('loginBtn').style.display = 'none';
   document.getElementById('registerBtn').style.display = 'none';
   document.getElementById('logoutBtn').style.display = 'block';
