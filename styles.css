@@ -61,6 +61,12 @@
     max-height: 600px;
 }
 
+.background {
+    background-color: whitesmoke;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+}
+
 .myImage {
     width: 100%;
 }
@@ -247,7 +253,7 @@
 
 .img .btnEdit, .img .btnDelete {
     position: absolute;
-    top: 72%;
+    top: 69%;
     font-size: 13px;
     /* padding: 12px 24px; */
     border: none;

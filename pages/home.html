@@ -332,17 +332,20 @@
 
     <div id="movies" class="row">
         <div id="template" class="template container-fluid col-12 col-sm-6 col-md-4">
-            <div class='img'>
-                <img class="myImage">
-                <button class="movie-delete  btnDelete fa fa-trash-o" style='display:none;' data-toggle="tooltip" title="Delete"></button>
-                <button class="movie-edit btnEdit fa fa-pencil" style='display:none;' data-toggle="tooltip" title="Edit"></button>
+            <div class='background'>
+                <div class='img'>
+                    <img class="myImage">
+                    <button class="movie-delete  btnDelete fa fa-trash-o" style='display:none;' data-toggle="tooltip"
+                        title="Delete"></button>
+                    <button class="movie-edit btnEdit fa fa-pencil" style='display:none;' data-toggle="tooltip" title="Edit"></button>
+                </div>
+                <div class="inline-movie">
+                    <div class="movie-title" style='cursor:pointer;'></div>
+                    <div class="rating"></div>
+                </div>
+                <!-- <p class="genre"></p> -->
+                <!-- <p class="year"></p> -->
             </div>
-            <div class="inline-movie">
-                <div class="movie-title" style='cursor:pointer;'></div>
-                <div class="rating"></div>
-            </div>
-            <!-- <p class="genre"></p> -->
-            <!-- <p class="year"></p> -->
         </div>
     </div>
     <div id='pagination'></div>
