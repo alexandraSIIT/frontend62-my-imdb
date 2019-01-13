@@ -57,6 +57,8 @@
 
 .template {
     width: 100%;
+    max-width:300px;
+    max-height: 600px;
 }
 
 .myImage {
@@ -176,24 +178,32 @@
 
 @media screen and (min-width: 768px) {
     #movies {
-        background-color: lightgreen;
+        background-color: lightgray;
+        align-content: center;
+        padding: 50px;
     }
     
     .myImage {
-        height: 500px;
+        max-height: 300px;
+        max-width: 400px;
     }
     .inline-movie {
         padding: 16px;
     }
     .movie-title {
-        height: 150px;
+        text-align: center;
+        font-size: 11px;
     }
-
+    .rating {
+        font-size: 10px;
+        float: right;
+    }
 }
 
 @media screen and (min-width: 992px) {
     #movies {
-        background-color: lightseagreen;
+        background-color: lightgray;
+        padding: 50px;
     }
 }
 
@@ -216,4 +226,8 @@
 
 .body {
     background-color:#131313
+}
+
+.row{
+    margin-right: -10px !important;
 }

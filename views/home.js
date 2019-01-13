@@ -35,7 +35,9 @@ function displayMovies(response) {
       imageUrl.setAttribute("src", response[i].poster);
     }
     var movieRatingElement = movieClone.querySelector(".rating");
-    movieRatingElement.innerHTML = response[i].rating;
+    if (response[i].rating) {
+      movieRatingElement.innerHTML = `Imdb score: ` + response[i].rating;
+    }
     // var movieGenreElement = movieClone.querySelector(".genre");
     // movieGenreElement.innerHTML = response[i].genre;
     // var movieYearElement = movieClone.querySelector(".year");
@@ -172,7 +174,7 @@ function addPagination(category, searchValue) {
   lastPageBtn.className = 'anchor-page-nb lastPage';
   lastPageBtn.addEventListener('click', function () {
     removeExistentMovies();
-    movies.getMovies(12, (movies.numberOfPages - 1) * 12 , category, searchValue).then(function () {
+    movies.getMovies(12, (movies.numberOfPages - 1) * 12, category, searchValue).then(function () {
       displayMovies(movies.items);
       var lastBtn = document.getElementsByClassName('lastPage')[0];
       lastBtn.className += ' active';
