@@ -25,7 +25,7 @@ function displayMovies(response) {
     movieTitleElement.addEventListener("click", function (event) {
 
       getMovieDetails(event.target, movie);
-      window.open("/pages/movieDetails.html?id=" + movie.id,
+      window.open("./movieDetails.html?id=" + movie.id,
         '_blank');
     })
     var imageUrl = movieClone.querySelector(".myImage");
@@ -485,7 +485,7 @@ registerBtn.addEventListener('click', function () {
 displayButtonsAfterLogin();
 function displayButtonsAfterLogin() {
   var username = localStorage.getItem('username');
-  if (accesToken) {
+  if (getAccessToken()) {
     displayButtons(username);
   }
 }

@@ -1,4 +1,6 @@
-var accesToken = localStorage.getItem('AccesToken');
+function getAccessToken() {
+  return localStorage.getItem('AccesToken');
+}
 
 function Movie(options = {}) {
   this.id = options._id;
@@ -63,7 +65,7 @@ Movie.prototype.updateMovieDetails = function () {
     url: apiRootUrl + that.id,
     method: "PUT",
     headers: { 
-      "X-Auth-Token": accesToken 
+      "X-Auth-Token": getAccessToken() 
     },
     data: {
       Title: that.title,
