@@ -51,11 +51,12 @@
 }
 
 .inline-movie {
-    font-size: 24px;
+    font-size: 11px;
     font-weight: bold;
     position: absolute;
     bottom: 20px;
     right: 0;
+    padding: 16px;
 }
 
 .template {
@@ -73,11 +74,16 @@
 
 .myImage {
     width: 100%;
-    min-height: 300px;
+    max-height: 300px;
+    max-width: 400px;
+}
+
+.rating {
+    float: right;
 }
 
 .anchor-page-nb {
-    color: white;
+    color: black;
     padding: 8px 12px;
     text-decoration: none;
     transition: background-color .3s;
@@ -247,7 +253,7 @@
 }
 
 .body {
-    background-color:#131313
+    background-color:lightgray;
 }
 
 .row{
