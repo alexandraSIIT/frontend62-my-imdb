@@ -244,6 +244,7 @@
 .navbar {
     margin-bottom: 0 !important;
     border: none !important;
+    background-color: #131313;
 }
 
 .label-title {
@@ -295,4 +296,8 @@ button[class='fa']::before {
 #edit-movie{
     max-height: 400px;
     overflow: auto;
+}
+
+#clear-search {
+    background-color: red;
 }
