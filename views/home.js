@@ -123,6 +123,7 @@ categoryDropDown.addEventListener('change', function () {
 })
 
 searchInput.addEventListener('keyup', function () {
+  searchInput.style.border = 'none';
   removeExistentMovies();
   displayMovies(movies.items);
 })
