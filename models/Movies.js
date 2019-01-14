@@ -1,4 +1,6 @@
-var accesToken = localStorage.getItem('AccesToken');
+function getAccessToken() {
+    return localStorage.getItem('AccesToken');
+}
 
 function Movies() {
     this.items = [];
@@ -50,7 +52,7 @@ Movies.prototype.addMovieRequest = function (
         method: "POST",
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-Auth-Token': accesToken
+            'X-Auth-Token': getAccessToken()
         },
         data: {
             Title: title.value,
@@ -70,10 +72,10 @@ Movies.prototype.addMovieRequest = function (
 
 Movies.prototype.deleteMovie = function (movieId) {
     return $.ajax({
-      headers: {
-        'X-Auth-Token': accesToken
-    },
-      url: movieUrl + '/' + movieId,
-      method: "DELETE",
+        headers: {
+            'X-Auth-Token': getAccessToken()
+        },
+        url: movieUrl + '/' + movieId,
+        method: "DELETE",
     });
-  }
+}
