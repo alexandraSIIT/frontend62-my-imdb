@@ -205,7 +205,6 @@ var addNewMovieBtn = document.getElementById("addNewMovieBtn");
 addNewMovieBtn.addEventListener("click", function (event) {
   event.preventDefault();
   addMovie();
-  document.getElementById('add-movie-form').reset();
 });
 
 var titleNewMovie = document.getElementById("title");
@@ -240,6 +239,7 @@ function addMovie() {
         addDialog.close();
         document.getElementById('succes-alert-add-movie').style.display = 'block';
         hideAlert('succes-alert-add-movie');
+        document.getElementById('add-movie-form').reset();
         removeExistentMovies();
         movies.getMovies(12, 0).then(function () {
           displayMovies(movies.items);
@@ -287,64 +287,138 @@ function editMovie(event) {
   movie.getMovieDetails(movieId).then(function (response) {
     console.log(response)
     var inputTitle = document.querySelector(".editTitle");
-    inputTitle.value = response.title;
+    if (!response.title) {
+      inputTitle.value = '';
+    } else {
+      inputTitle.value = response.title;
+    }
 
     var inputYear = document.querySelector(".editYear");
     inputYear.value = response.year;
 
     var inputRated = document.querySelector(".editRated");
-    inputRated.value = response.rated;
+    console.log(response.rated)
+    if (response.rated === 'undefined') {
+      console.log('rated')
+      inputRated.value = '';
+    } else {
+      console.log('not')
+      inputRated.value = response.rated;
+    }
 
     var inputRuntime = document.querySelector(".editRuntime");
-    inputRuntime.value = response.runtime;
+    if (inputRuntime === 'undefined') {
+      inputRuntime.value = '';
+    } else {
+      inputRuntime.value = response.runtime;
+    }
 
     var inputGenre = document.querySelector(".editGenre");
-    inputGenre.value = response.genre;
+    if (response.genre === 'undefined') {
+      inputGenre.value = '';
+    } else {
+      inputGenre.value = response.genre;
+    }
 
     var inputDirector = document.querySelector(".editDirector");
-    inputDirector.value = response.director;
+    if (response.director === 'undefined') {
+      inputDirector.value = '';
+    } else {
+      inputDirector.value = response.director;
+    }
 
     var inputWriter = document.querySelector(".editWriter");
-    inputWriter.value = response.writer;
+    if (response.writer === 'undefined') {
+      inputWriter.value = '';
+    } else {
+      inputWriter.value = response.writer;
+    }
 
     var inputActors = document.querySelector(".editActors");
-    inputActors.value = response.actors;
+    if (response.actors === 'undefined') {
+      inputActors.value = '';
+    } else {
+      inputActors.value = response.actors;
+    }
+
 
     var inputPlot = document.querySelector(".editPlot");
-    inputPlot.value = response.plot;
+    if (response.plot === 'undefined') {
+      inputPlot.value = '';
+    } else {
+      inputPlot.value = response.plot;
+    }
 
     var inputLanguage = document.querySelector(".editLanguage");
-    inputLanguage.value = response.language;
+    if (response.language === 'undefined') {
+      inputLanguage.value = '';
+    } else {
+      inputLanguage.value = response.language;
+    }
 
     var inputCountry = document.querySelector(".editCountry");
-    inputCountry.value = response.country;
+    if (response.country === 'undefined') {
+      inputCountry.value = '';
+    } else {
+      inputCountry.value = response.country;
+    }
 
     var inputAwards = document.querySelector(".editAwards");
-    inputAwards.value = response.awards;
+    if (response.awards === 'undefined') {
+      inputAwards.value = '';
+    } else {
+      inputAwards.value = response.awards;
+    }
 
     var inputPoster = document.querySelector(".editPoster");
-    inputPoster.value = response.poster;
+    if (response.poster === 'undefined') {
+      inputPoster.value = '';
+    } else {
+      inputPoster.value = response.poster;
+    }
 
     var inputMetascore = document.querySelector(".editMetascore");
-    inputMetascore.value = response.metascore;
+    if (response.metascore === 'undefined') {
+      inputMetascore.value = '';
+    } else {
+      inputMetascore.value = response.metascore;
+    }
 
     var inputRating = document.querySelector(".editRating");
-    inputRating.value = response.rating;
+    if (response.rating === 'undefined') {
+      inputRating.value = '';
+    } else {
+      inputRating.value = response.rating;
+    }
 
     var inputType = document.querySelector(".editType");
-    inputType.value = response.type;
+    if (response.type === 'undefined') {
+      inputType.value = '';
+    } else {
+      inputType.value = response.type;
+    }
 
     var inputDvd = document.querySelector(".editDvd");
-    inputDvd.value = response.dvd;
+    if (response.dvd === 'undefined') {
+      inputDvd.value = '';
+    } else {
+      inputDvd.value = response.dvd;
+    }
 
     var inputBoxOffice = document.querySelector(".editBoxoffice");
-    inputBoxOffice.value = response.boxOffice;
+    if (response.boxOffice === 'undefined') {
+      inputBoxOffice.value = '';
+    } else {
+      inputBoxOffice.value = response.boxOffice;
+    }
 
     var inputProduction = document.querySelector(".editProduction");
-    inputProduction.value = response.production;
-
+    if (response.production === 'undefined') {
+      inputProduction.value = '';
+    } else {
+      inputProduction.value = response.production;
+    }
     editDialog.showModal();
-
   })
 
 
