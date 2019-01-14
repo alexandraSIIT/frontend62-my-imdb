@@ -23,3 +23,6 @@ $(function() {
     });
 });
 
+$("input").keypress(function(){
+    $(".error").hide();
+  });
