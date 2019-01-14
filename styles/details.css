@@ -1,0 +1,23 @@
+* {
+    padding: 5px;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: lightgray
+  }
+.poster {
+   align-content: center;
+}
+.title {
+    text-align: center;
+    font-size: 25px;
+    /* column-span: all */
+}
+.details{
+    column-count: 2;
+    column-gap:10px;
+}
+#movie-text{
+position: relative;
+top: 100px;
+}
+

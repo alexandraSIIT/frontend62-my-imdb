@@ -119,12 +119,15 @@ categoryDropDown.addEventListener('change', function () {
   searchInput.style.border = 'none';
   searchInput.value = '';
   removeExistentMovies();
-  displayMovies(movies.items);
+  getMovies();
 })
 
-searchInput.addEventListener('keyup', function () {
+var clearSearchBtn = document.getElementById('clear-search');
+clearSearchBtn.addEventListener('click', function () {
+  searchInput.style.border = 'none';
+  searchInput.value = '';
   removeExistentMovies();
-  displayMovies(movies.items);
+  getMovies();
 })
 
 
