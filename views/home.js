@@ -390,17 +390,21 @@ function editMovie(event) {
       boxOffice: inputBoxOffice.value,
       production: inputProduction.value
     });
-    movie.updateMovieDetails();
-    editDialog.close();
-    document.querySelector(".edit-movie-form").reset();
-    document.getElementById('succes-alert-edit-movie').style.display = 'block';
-    hideAlert('succes-alert-edit-movie');
-    removeExistentMovies();
-    movies.getMovies(12, 0).then(function () {
-      displayMovies(movies.items);
-      console.log(movies.items)
-    });
+    movie.updateMovieDetails().then(function () {
+
+
+      editDialog.close();
+      document.querySelector(".edit-movie-form").reset();
+      document.getElementById('succes-alert-edit-movie').style.display = 'block';
+      hideAlert('succes-alert-edit-movie');
+      removeExistentMovies();
+      movies.getMovies(12, 0).then(function () {
+        displayMovies(movies.items);
+        console.log(movies.items)
+      });
+    })
   })
+
   var closeButton = document.querySelector(".modal-close");
   closeButton.onclick = function (event) {
     event.preventDefault();
