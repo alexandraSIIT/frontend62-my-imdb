@@ -203,6 +203,7 @@
 /* MEDIA QUERIES */
 
 @media screen and (min-width: 768px) {
+    
     #movies {
         background-color: lightgray;
         align-content: center;
@@ -235,6 +236,12 @@
     }
     #edit-movie-dialog {
         min-width: 700px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #search-category {
+       width: 25%;
     }
 }
 
