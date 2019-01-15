@@ -142,6 +142,7 @@ function addPagination(category, searchValue) {
     movies.getMovies(12, 0, category, searchValue).then(function () {
       displayMovies(movies.items);
       var firstBtn = document.getElementsByClassName('firstPage')[0];
+      document.getElementsByClassName('anchor-page-nb')[1].classList.remove("active");
       firstBtn.className += ' active';
     });
   });
@@ -153,6 +154,7 @@ function addPagination(category, searchValue) {
     anchor.className = 'anchor-page-nb';
     pagination.appendChild(anchor);
   }
+  document.getElementsByClassName('anchor-page-nb')[1].className += ' active';
 
   Array.from(document.querySelectorAll('.anchor-page-nb:not(.firstPage)')).forEach(function (anchor, index) {
     anchor.addEventListener('click', function (event) {
@@ -162,6 +164,7 @@ function addPagination(category, searchValue) {
         var anchors = document.getElementsByClassName('anchor-page-nb');
         for (var i = 0; i < anchors.length; i++) {
           if (anchors[i].innerHTML === (index + 1).toString()) {
+            document.getElementsByClassName('anchor-page-nb')[1].classList.remove("active");
             anchors[i].className += ' active';
           }
         }
@@ -177,6 +180,7 @@ function addPagination(category, searchValue) {
     movies.getMovies(12, (movies.numberOfPages - 1) * 12, category, searchValue).then(function () {
       displayMovies(movies.items);
       var lastBtn = document.getElementsByClassName('lastPage')[0];
+      document.getElementsByClassName('anchor-page-nb')[1].classList.remove("active");
       lastBtn.className += ' active';
     });
   });
