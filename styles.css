@@ -233,14 +233,22 @@
         background-color: lightgray;
         padding: 50px;
     }
+    #edit-movie-dialog {
+        min-width: 700px;
+    }
 }
 
-/* @media screen and (min-width: 1200px) {
-    #movies {
-        background-color: yellow;
+@media screen and (min-width: 768px) {
+    #edit-movie-dialog {
+        min-width: 700px;
     }
-    
-} */
+}
+
+@media screen and (min-width: 1200px) {
+    #edit-movie-dialog {
+        min-width: 700px;
+    }
+}
 .navbar {
     margin-bottom: 0 !important;
     border: none !important;
@@ -289,9 +297,9 @@ button[class='fa']::before {
     background: transparent;
 }
 
-#edit-movie-dialog {
+/* #edit-movie-dialog {
     min-width: 700px;
-}
+} */
 
 #edit-movie{
     max-height: 400px;
